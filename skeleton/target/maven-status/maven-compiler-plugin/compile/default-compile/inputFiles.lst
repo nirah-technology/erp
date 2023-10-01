@@ -1,0 +1,10 @@
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/infrastructure/plugins/DefaultPlginRegistry.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/interfaces/cli/CommandLineInterface.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/interfaces/UserInterfaceFactory.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/interfaces/gui/GraphicalUserInterface.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/SkeletonApplication.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/infrastructure/plugins/PluginsRegistryFactory.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/ApplicationConfiguration.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/interfaces/gui/ErpWindow.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/interfaces/UserInterface.java
+/home/nicolas/Documents/Nirah-Technology/erp/skeleton/src/main/java/io/nirahtech/erp/skeleton/infrastructure/plugins/PluginsRegistry.java
