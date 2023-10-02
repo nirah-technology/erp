@@ -3,8 +3,10 @@ io/nirahtech/erp/core/Company.class
 io/nirahtech/erp/core/Project.class
 io/nirahtech/erp/core/Gender.class
 io/nirahtech/erp/core/EmailAddress.class
+io/nirahtech/erp/core/BankAccount.class
 io/nirahtech/erp/core/Human.class
 io/nirahtech/erp/core/Employee.class
 io/nirahtech/erp/core/MailingAddress.class
 io/nirahtech/erp/core/Customer.class
+io/nirahtech/erp/core/Bank.class
 io/nirahtech/erp/core/Entity.class

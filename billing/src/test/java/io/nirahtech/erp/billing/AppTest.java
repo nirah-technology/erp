@@ -1,13 +1,14 @@
 package io.nirahtech.erp.billing;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.Locale;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.nirahtech.erp.core.BankAccount;
 import io.nirahtech.erp.core.EmailAddress;

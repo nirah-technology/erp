@@ -1,0 +1,11 @@
+io/nirahtech/erp/billing/Product.class
+io/nirahtech/erp/billing/InvoiceNumber.class
+io/nirahtech/erp/billing/InvoiceBuilder.class
+io/nirahtech/erp/billing/Service.class
+io/nirahtech/erp/billing/ContractingParty.class
+io/nirahtech/erp/billing/Offer.class
+io/nirahtech/erp/billing/Customer.class
+io/nirahtech/erp/billing/AbstractOffer.class
+io/nirahtech/erp/billing/Provider.class
+io/nirahtech/erp/billing/InvoiceRecordDetail.class
+io/nirahtech/erp/billing/Invoice.class

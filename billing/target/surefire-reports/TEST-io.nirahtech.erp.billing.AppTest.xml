@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.nirahtech.AppTest" time="0.156" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.nirahtech.erp.billing.AppTest" time="0.266" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/test-classes:/home/nicolas/Documents/Nirah-Technology/erp/billing/target/classes:/home/nicolas/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/nicolas/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="java.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/test-classes:/home/nicolas/Documents/Nirah-Technology/erp/billing/target/classes:/home/nicolas/Documents/Nirah-Technology/erp/core/target/core-1.0-SNAPSHOT.jar:/home/nicolas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/nicolas/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:/home/nicolas/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/nicolas/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/nicolas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/nicolas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
     <property name="java.vm.vendor" value="Red Hat, Inc."/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://www.redhat.com/"/>
+    <property name="user.timezone" value="Europe/Paris"/>
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-17.0.7.0.7-1.fc36.x86_64/lib"/>
-    <property name="sun.java.command" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire/surefirebooter-20230927225000252_6.jar /home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire 2023-09-27T22-49-57_734-jvmRun1 surefire-20230927225000252_4tmp surefire_1-20230927225000252_5tmp"/>
+    <property name="sun.java.command" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire/surefirebooter-20231002222452587_6.jar /home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire 2023-10-02T22-24-50_682-jvmRun1 surefire-20231002222452587_4tmp surefire_1-20231002222452587_5tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/test-classes:/home/nicolas/Documents/Nirah-Technology/erp/billing/target/classes:/home/nicolas/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/nicolas/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="surefire.test.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/test-classes:/home/nicolas/Documents/Nirah-Technology/erp/billing/target/classes:/home/nicolas/Documents/Nirah-Technology/erp/core/target/core-1.0-SNAPSHOT.jar:/home/nicolas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/nicolas/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:/home/nicolas/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/nicolas/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/nicolas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/nicolas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/home/nicolas"/>
     <property name="user.language" value="en"/>
@@ -27,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire/surefirebooter-20230927225000252_6.jar"/>
+    <property name="surefire.real.class.path" value="/home/nicolas/Documents/Nirah-Technology/erp/billing/target/surefire/surefirebooter-20231002222452587_6.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.7+7"/>
     <property name="user.name" value="nicolas"/>
@@ -52,5 +53,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="io.nirahtech.AppTest" time="0.012"/>
+  <testcase name="shouldAnswerWithTrue" classname="io.nirahtech.erp.billing.AppTest" time="0.197">
+    <system-out><![CDATA[2400.0
+2616.0
+216.0
+2023102222453342428333
+]]></system-out>
+  </testcase>
 </testsuite>
