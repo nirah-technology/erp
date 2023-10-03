@@ -12,7 +12,8 @@ public final record Bank(
     BranchCode branchCode,
     Locale country,
     Set<BankAccount> accounts,
-    Set<AccountHolder> customers
+    Set<AccountHolder> customers,
+    FinancialTransactionExecutor financialTransactionExecutor
 ) implements BankAccountManager, BankCustomerManager {
 
     @Override
