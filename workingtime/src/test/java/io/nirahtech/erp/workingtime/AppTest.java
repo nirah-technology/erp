@@ -1,13 +1,22 @@
-```java
-
 package io.nirahtech.erp.workingtime;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
-public class Program {
-    public static void main(String[] args) {
+import org.junit.jupiter.api.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest 
+{
+    /**
+     * Rigorous Test :-)
+     */
+    @Test
+    public void shouldAnswerWithTrue()
+    {
         final Company empire = new Company("Empire");
 
         final Project deathStarProject = empire.launchProject("Death Star");
@@ -41,5 +50,3 @@ public class Program {
         empire.fire(jane);
     }
 }
-
-```

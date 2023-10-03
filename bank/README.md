@@ -8,36 +8,25 @@ import java.util.concurrent.TimeUnit;
 
 public class Program {
     public static void main(String[] args) {
-        final Company adelya = new Company("Adelya");
+        
+        final AccountHolder john = new AccountHolder("John", "DOE", LocalDate.of(1993, 1, 6), new HashSet<>());
+        final AccountHolder jane = new AccountHolder("Jane", "DOE", LocalDate.of(1995, 11, 5), new HashSet<>());
+        
+        final Bank galacticBank = BankFactory.create("Intergalactic Bank", new BankCode("AAAA"), new BranchCode("TOU"), Locale.FRANCE);
+        final Bank resistanceBank = BankFactory.create("Resistence Bank", new BankCode("BBBB"), new BranchCode("PAR"), Locale.FRANCE);
+        
+        galacticBank.registerNewCustomer(john);
+        resistanceBank.registerNewCustomer(jane);
+        
+        final BankAccount ccpJohn = galacticBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, john);
+        ccpJohn.credit(new BigDecimal(25_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
+        final BankAccount ccpJane = resistanceBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, jane);
+        ccpJane.credit(new BigDecimal(30_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
 
-        final Project frameworkProject = adelya.launchProject("Framework");
+        final float amount = 1_000.00F;
 
-        final Employee nicolas = new Employee("Nicolas", "METIVIER", BigDecimal.valueOf(24.72F));
-        final Employee vincent = new Employee("Vicent", "RETORE", BigDecimal.valueOf(23.08F));
+        john.transferMoney(ccpJohn, ccpJane, BigDecimal.valueOf(amount), Currency.getInstance(Locale.FRANCE));
 
-        adelya.recruit(nicolas);
-        adelya.recruit(vincent);
-
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(60), 7, TimeUnit.DAYS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(30), 5, TimeUnit.HOURS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(29), 6, TimeUnit.HOURS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(28), 6, TimeUnit.HOURS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(27), 7, TimeUnit.HOURS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(28), 45, TimeUnit.MINUTES, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(2), 3, TimeUnit.HOURS, frameworkProject));
-        nicolas.impute(new Imputation(LocalDate.now().minusDays(1), 7, TimeUnit.HOURS, frameworkProject));
-
-        vincent.impute(new Imputation(LocalDate.now().minusDays(1), 5, TimeUnit.HOURS, frameworkProject));
-
-        BigDecimal generatedMoneyByNicolas = nicolas.computeGeneratedMoney(frameworkProject);
-        BigDecimal generatedMoneyByVincent = vincent.computeGeneratedMoney(frameworkProject);
-        BigDecimal generatedMoneyByAdelya = adelya.computeGeneratedMoney(frameworkProject);
-
-        System.out.println(generatedMoneyByNicolas);
-        System.out.println(generatedMoneyByVincent);
-        System.out.println(generatedMoneyByAdelya);
-        adelya.fire(nicolas);
-        adelya.fire(vincent);
     }
 }
 

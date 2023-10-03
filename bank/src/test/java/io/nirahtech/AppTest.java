@@ -32,30 +32,30 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue() throws ParseException
     {
-        final AccountHolder nicolas = new AccountHolder("Nicolas", "METIVIER", LocalDate.of(1993, 1, 6), new HashSet<>());
-        final AccountHolder rebecca = new AccountHolder("Rébecca", "MOLARET", LocalDate.of(1995, 11, 5), new HashSet<>());
+        final AccountHolder john = new AccountHolder("John", "DOE", LocalDate.of(1993, 1, 6), new HashSet<>());
+        final AccountHolder jane = new AccountHolder("Jane", "DOE", LocalDate.of(1995, 11, 5), new HashSet<>());
         
-        final Bank laBanquePostale = BankFactory.create("La Banque Postale", new BankCode("PSST"), new BranchCode("TOU"), Locale.FRANCE);
-        final Bank creditMutuel = BankFactory.create("Credit Mutuel", new BankCode("CRML"), new BranchCode("TOU"), Locale.FRANCE);
+        final Bank galacticBank = BankFactory.create("Intergalactic Bank", new BankCode("AAAA"), new BranchCode("TOU"), Locale.FRANCE);
+        final Bank resistanceBank = BankFactory.create("Resistence Bank", new BankCode("BBBB"), new BranchCode("PAR"), Locale.FRANCE);
         
-        laBanquePostale.registerNewCustomer(nicolas);
-        creditMutuel.registerNewCustomer(rebecca);
+        galacticBank.registerNewCustomer(john);
+        resistanceBank.registerNewCustomer(jane);
         
-        final BankAccount ccpNicolas = laBanquePostale.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, nicolas);
-        ccpNicolas.credit(new BigDecimal(25_000.00F), Currency.getInstance(ccpNicolas.getBank().country()));
-        final BankAccount ccpRebecca = creditMutuel.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, rebecca);
-        ccpRebecca.credit(new BigDecimal(30_000.00F), Currency.getInstance(ccpNicolas.getBank().country()));
+        final BankAccount ccpJohn = galacticBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, john);
+        ccpJohn.credit(new BigDecimal(25_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
+        final BankAccount ccpJane = resistanceBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, jane);
+        ccpJane.credit(new BigDecimal(30_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
 
-        assertEquals(new BigDecimal(25_000.00F).floatValue(), ccpNicolas.getBalance().floatValue());
-        assertEquals(new BigDecimal(30_000.00F).floatValue(), ccpRebecca.getBalance().floatValue());
+        assertEquals(new BigDecimal(25_000.00F).floatValue(), ccpJohn.getBalance().floatValue());
+        assertEquals(new BigDecimal(30_000.00F).floatValue(), ccpJane.getBalance().floatValue());
 
         final float amount = 1_000.00F;
 
-        nicolas.transferMoney(ccpNicolas, ccpRebecca, BigDecimal.valueOf(amount), Currency.getInstance(Locale.FRANCE));
+        john.transferMoney(ccpJohn, ccpJane, BigDecimal.valueOf(amount), Currency.getInstance(Locale.FRANCE));
 
         
-        assertEquals(new BigDecimal(25_000.00F-amount).floatValue(), ccpNicolas.getBalance().floatValue());
-        assertEquals(new BigDecimal(30_000.00F+amount).floatValue(), ccpRebecca.getBalance().floatValue());
+        assertEquals(new BigDecimal(25_000.00F-amount).floatValue(), ccpJohn.getBalance().floatValue());
+        assertEquals(new BigDecimal(30_000.00F+amount).floatValue(), ccpJane.getBalance().floatValue());
 
     }
 }
