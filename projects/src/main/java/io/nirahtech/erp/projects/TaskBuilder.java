@@ -11,6 +11,7 @@ public final class TaskBuilder {
     private UUID id = UUID.randomUUID();
     private String name = null;
     private String details = null;
+    private Status status = Status.IDLE;
     private Task parent = null;
     private Set<Task> subTasks = new HashSet<>();
     private Set<Task> requiredTasks = new HashSet<>();
@@ -29,6 +30,11 @@ public final class TaskBuilder {
 
     public final TaskBuilder name(final String name) {
         this.name = name;
+        return this;
+    }
+
+    public final TaskBuilder status(final Status status) {
+        this.status = status;
         return this;
     }
 
@@ -68,7 +74,7 @@ public final class TaskBuilder {
     }
 
     public final Task build() {
-        final Task task = new Task(this.id, this.name, this.details, this.parent, this.subTasks, this.requiredTasks, this.startDate, this.duration, this.workers);
+        final Task task = new Task(this.id, this.name, this.details, this.status, this.parent, this.subTasks, this.requiredTasks, this.startDate, this.duration, this.workers);
         if (Objects.nonNull(this.parent)) {
             this.parent.subTasks().add(task);
         }

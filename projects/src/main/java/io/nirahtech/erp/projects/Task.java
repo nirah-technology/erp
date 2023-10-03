@@ -9,6 +9,7 @@ public record Task(
     UUID id,
     String name,
     String details,
+    Status status,
     Task parent,
     Set<Task> subTasks,
     Set<Task> requiredTasks,

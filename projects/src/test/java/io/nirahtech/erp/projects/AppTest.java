@@ -66,5 +66,7 @@ public class AppTest
             task7,
             task8
         )));
+
+        // System.out.println(clonesTrainingProject.getWorkingDays());
     }
 }
