@@ -15,6 +15,7 @@
       <module>core</module>
       <module>billing</module>
       <module>bank</module>
+      <module>projects</module>
       <module>skeleton</module>
       <module>plugins</module>
       <module>workingtime</module>
