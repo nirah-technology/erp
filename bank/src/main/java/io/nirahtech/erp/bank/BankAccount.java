@@ -5,14 +5,19 @@ import java.math.BigDecimal;
 
 public final class BankAccount implements Serializable {
     private final BankDetails bankDetails;
+    private final BankAccountType accountType;
     private final Bank bank;
     private final AccountHolder accountHolder;
     private BigDecimal balance = BigDecimal.valueOf(0.0F);
 
-    public BankAccount(final Bank bank, final AccountHolder accountHolder, final BankDetails bankDetails) {
+    public BankAccount(final BankAccountType accountType, final Bank bank, final AccountHolder accountHolder, final BankDetails bankDetails) {
         this.bank = bank;
+        this.accountType = accountType;
         this.accountHolder = accountHolder;
         this.bankDetails = bankDetails;
+    }
+    public BankAccountType getAccountType() {
+        return accountType;
     }
 
     public final BigDecimal getBalance() {
@@ -27,6 +32,10 @@ public final class BankAccount implements Serializable {
 
     public final AccountHolder getAccountHolder() {
         return this.accountHolder;
+    }
+
+    public final void close() {
+
     }
 
     @Override

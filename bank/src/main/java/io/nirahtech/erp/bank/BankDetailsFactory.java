@@ -6,10 +6,9 @@ import java.util.UUID;
 public final class BankDetailsFactory {
     private BankDetailsFactory() { }
 
-    public static final BankDetails create(final Bank bank, final AccountHolder accountHolder) {
+    public static final BankDetails create(final Bank bank, final BranchCode branchCode, final AccountHolder accountHolder) {
         final UUID accountNumberUUID = UUID.randomUUID();
         final AccountNumber accountNumber = new AccountNumber(accountNumberUUID.toString().replace("-", "").substring(0, 30));
-        final BranchCode branchCode = new BranchCode("TST");
         return new BankDetails(
             accountHolder, 
             bank.name(), 
@@ -19,7 +18,7 @@ public final class BankDetailsFactory {
             "null", 
             new InternationalBankAccountNumber(
                 bank.country(),
-                12,
+                76,
                 new BasicBankAccountNumber(
                     bank.code(),
                     branchCode,

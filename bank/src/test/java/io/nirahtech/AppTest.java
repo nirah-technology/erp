@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import io.nirahtech.erp.bank.AccountHolder;
 import io.nirahtech.erp.bank.Bank;
 import io.nirahtech.erp.bank.BankAccount;
-import io.nirahtech.erp.bank.BankAccountFactory;
+import io.nirahtech.erp.bank.BankAccountType;
 import io.nirahtech.erp.bank.BankCode;
-import io.nirahtech.erp.bank.BankDetails;
-import io.nirahtech.erp.bank.BankDetailsFactory;
+import io.nirahtech.erp.bank.BankFactory;
+import io.nirahtech.erp.bank.BranchCode;
 
 /**
  * Unit test for simple App.
@@ -28,13 +28,10 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue() throws ParseException
     {
-        Bank bank = new Bank("Test", new BankCode("TST"), Locale.FRANCE, new HashSet<>());
-        AccountHolder accountHolder = new AccountHolder("Nicolas", "METIVIER", LocalDate.now(), new HashSet<>());
-        BankDetails rib = BankDetailsFactory.create(
-            bank,
-            accountHolder
-        );
-        BankAccount account = BankAccountFactory.create(bank, accountHolder);
-        System.out.println( account);
+        final AccountHolder nicolas = new AccountHolder("Nicolas", "METIVIER", LocalDate.of(1993, 1, 6), new HashSet<>());
+        final Bank laBanquePostale = BankFactory.create("La Banque Postale", new BankCode("PSST"), new BranchCode("TOU"), Locale.FRANCE);
+        final BankAccount ccp = laBanquePostale.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, nicolas);
+        System.out.println(ccp.getBankDetails().iban());
+        System.out.println(ccp.getBankDetails().bic());
     }
 }
