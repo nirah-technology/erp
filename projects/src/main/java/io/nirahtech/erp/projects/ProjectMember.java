@@ -1,7 +1,7 @@
 package io.nirahtech.erp.projects;
 
-public record ProjectMember(
-    
+public final record ProjectMember(
+    ProjectMemberIdentifier id
 ) {
     
 }

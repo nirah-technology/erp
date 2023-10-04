@@ -5,10 +5,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
-public record Task(
-    UUID id,
+public final record Task(
+    TaskIdentifier id,
     String name,
     String details,
     Status status,
@@ -24,7 +23,7 @@ public record Task(
     Set<ProjectMember> workers,
     int maxWorkers
 ) {
-
+    
     public final LocalDate getDeadLine() {
         return this.startDate.plusDays(this.duration.toDays());
     }

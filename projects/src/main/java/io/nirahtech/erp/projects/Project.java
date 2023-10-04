@@ -1,14 +1,21 @@
 package io.nirahtech.erp.projects;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
-public record Project(
+import io.nirahtech.erp.projects.utils.CriticalPathCalculator;
+
+public final record Project(
+    ProjectIdentifier id,
     String name,
     String description,
     ProjectMember director,
+    LocalDate startDate,
+    Duration duration,
     Set<Team> teams,
+    Status status,
     Set<WorkPackage> packages) {
 
   public final long computeCumulativeWorkingDays() {
