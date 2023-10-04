@@ -2,7 +2,9 @@ package io.nirahtech.erp.projects;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -13,7 +15,7 @@ public final class TaskBuilder {
     private String details = null;
     private Status status = Status.IDLE;
     private Task parent = null;
-    private Set<Task> subTasks = new HashSet<>();
+    private List<Task> subTasks = new ArrayList<>();
     private Set<Task> requiredTasks = new HashSet<>();
     private LocalDate startDate = null;
     private Duration duration = Duration.ofDays(1);
@@ -45,7 +47,6 @@ public final class TaskBuilder {
 
     public final TaskBuilder parent(final Task parent) {
         this.parent = parent;
-        this.requiredTasks.add(parent);
         return this;
     }
 
@@ -74,9 +75,9 @@ public final class TaskBuilder {
     }
 
     public final Task build() {
-        final Task task = new Task(this.id, this.name, this.details, this.status, this.parent, this.subTasks, this.requiredTasks, this.startDate, this.duration, this.workers);
+        final Task task = new Task(this.id, this.name, this.details, this.status, this.parent, this.subTasks, this.requiredTasks, this.startDate, this.duration, Priority.NORMAL, Set.of(), Set.of(), null, Set.of(), this.workers);
         if (Objects.nonNull(this.parent)) {
-            this.parent.subTasks().add(task);
+            // this.parent.subTasks().add(task);
         }
         return task;
     }

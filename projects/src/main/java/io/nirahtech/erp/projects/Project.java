@@ -1,15 +1,32 @@
 package io.nirahtech.erp.projects;
 
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
 
-public record Project(String name, Set<Task> tasks) {
-    public int getWorkingDays() {
-        final AtomicLong counter = new AtomicLong(0);
-        tasks.forEach(task -> {
-            long days = task.duration().getSeconds() % (60*60);
-            counter.addAndGet(days);
-        });
-        return counter.intValue();
-    }
+public record Project(
+    String name,
+    String description,
+    ProjectMember director,
+    Set<Team> teams,
+    Set<WorkPackage> packages) {
+
+  public final long computeCumulativeWorkingDays() {
+    return packages.stream()
+        .mapToLong(WorkPackage::computeCumulativeWorkingDays)
+        .sum();
+  }
+
+  public Optional<LocalDate> getEstimatedEndDate() {
+    long timestamp = this.packages
+        .stream()
+        .map(WorkPackage::getEstimatedEndDate)
+        .mapToLong(workPackage -> workPackage.get().toEpochDay())
+        .max().orElse(0);
+    return Optional.ofNullable(LocalDate.ofEpochDay(timestamp));
+  }
+
+  public final long computeMaxCriticalPathValue() {
+    return CriticalPathCalculator.compute(this);
+  }
 }
