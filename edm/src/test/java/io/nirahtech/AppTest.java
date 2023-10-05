@@ -3,13 +3,14 @@ package io.nirahtech;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 import io.nirahtech.erp.edm.document.Document;
 import io.nirahtech.erp.edm.document.DocumentFactory;
 import io.nirahtech.erp.edm.repository.DocumentRepository;
-import io.nirahtech.erp.edm.repository.JSONDocumentRepository;
+import io.nirahtech.erp.edm.repository.DefaultDocumentRepository;
 
 /**
  * Unit test for simple App.
@@ -23,8 +24,8 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue() throws ParseException
     {
-        DocumentRepository repository = new JSONDocumentRepository(new File("database.json"));
-        Document doc = DocumentFactory.create("test.pdf");
+        DocumentRepository repository = new DefaultDocumentRepository(new File("database.rpstr"));
+        Document doc = DocumentFactory.create(UUID.randomUUID().toString()+".pdf");
         repository.persist(doc);
         repository.findById(doc.getId());
     }

@@ -17,14 +17,5 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
-  <dependencies>
-    <!-- https://mvnrepository.com/artifact/jakarta.json/jakarta.json-api -->
-    <dependency>
-        <groupId>jakarta.json</groupId>
-        <artifactId>jakarta.json-api</artifactId>
-        <version>2.1.2</version>
-    </dependency>
-
-  </dependencies>
 
 </project>

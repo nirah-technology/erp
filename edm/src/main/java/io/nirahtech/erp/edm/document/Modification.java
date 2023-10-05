@@ -1,5 +1,7 @@
 package io.nirahtech.erp.edm.document;
 
-public record Modification() {
+import java.io.Serializable;
+
+public record Modification() implements Serializable {
     
 }

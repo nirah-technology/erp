@@ -1,5 +1,7 @@
 package io.nirahtech.erp.edm.document;
 
-public record Comment() {
+import java.io.Serializable;
+
+public record Comment() implements Serializable {
     
 }

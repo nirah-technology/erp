@@ -1,6 +1,8 @@
 package io.nirahtech.erp.edm.document;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Runtime.Version;
 import java.nio.file.Files;
@@ -137,23 +139,16 @@ public final class ElectronicalDocument implements Document {
     }
 
     @Override
-    public boolean search(String... data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
-    }
-
-    @Override
-    public void allowToRead(DocumentReader... readers) {
-        if (Objects.nonNull(readers)) {
-            this.readers.addAll(Set.of(readers));
+    public boolean search(String data) {
+        boolean isFound = false;
+        if (Objects.nonNull(data)) {
+            try (final BufferedReader buffer = new BufferedReader(new FileReader(this.file))) {
+                isFound = buffer.lines().filter(line -> line.toLowerCase().contains(data.toLowerCase())).findAny().isPresent();
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
         }
-    }
-
-    @Override
-    public void allowToWrite(DocumentWriter... writers) {
-        if (Objects.nonNull(readers)) {
-            this.writers.addAll(Set.of(writers));
-        }
+        return isFound;
     }
 
     @Override
@@ -235,21 +230,21 @@ public final class ElectronicalDocument implements Document {
         return this.file.exists();
     }
     @Override
-    public boolean searchInCommentsOnly(String... data) {
+    public boolean searchInCommentsOnly(String data) {
         return false;
     }
     @Override
-    public boolean searchInMetadatasOnly(String... data) {
+    public boolean searchInMetadatasOnly(String data) {
         // TODO Auto-generated method stub
         return false;
     }
     @Override
-    public boolean searchInTagsOnly(String... data) {
+    public boolean searchInTagsOnly(String data) {
         // TODO Auto-generated method stub
         return false;
     }
     @Override
-    public boolean searchInfileOnly(String... data) {
+    public boolean searchInfileOnly(String data) {
         // TODO Auto-generated method stub
         return false;
     }

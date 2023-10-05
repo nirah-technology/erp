@@ -21,8 +21,6 @@ public interface DocumentRepository extends Repository<DocumentIdentifier, Docum
     Collection<Document> findAllByOwner(final String owner);
     Collection<Document> findAllByTag(final Tag tag);
 
-    Collection<Document> findAllByDocumentReader(final DocumentReader reader);
-    Collection<Document> findAllByDocumentWriter(final DocumentWriter writer);
     Collection<Document> findAllByArchived(final boolean isArchived);
     Collection<Document> findAllWithValue(final String value);
 
