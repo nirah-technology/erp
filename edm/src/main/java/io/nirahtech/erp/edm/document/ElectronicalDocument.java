@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.lang.Runtime.Version;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashSet;
@@ -15,6 +13,7 @@ import java.util.Set;
 
 public final class ElectronicalDocument implements Document {
 
+    private final DocumentIdentifier id;
     private final File file;
     private final Version version;
     private final String owner;
@@ -31,6 +30,7 @@ public final class ElectronicalDocument implements Document {
 
 
     public ElectronicalDocument(
+        final DocumentIdentifier id,
         final File file,
         final Version version,
         final String owner,
@@ -43,6 +43,7 @@ public final class ElectronicalDocument implements Document {
         final Set<DocumentReader> readers,
         final Set<DocumentWriter> writers
     ) {
+        this.id = id;
         this.file = file;
         this.version = version;
         this.owner = owner;
@@ -55,7 +56,11 @@ public final class ElectronicalDocument implements Document {
         this.readers.addAll(readers);
         this.writers.addAll(writers);
     }
-
+    
+    @Override
+    public DocumentIdentifier getId() {
+        return this.id;
+    }
 
     @Override
     public Set<Tag> getTags() {
@@ -248,4 +253,5 @@ public final class ElectronicalDocument implements Document {
         // TODO Auto-generated method stub
         return false;
     }
+
 }
