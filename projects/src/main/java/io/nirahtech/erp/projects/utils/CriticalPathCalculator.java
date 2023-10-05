@@ -13,7 +13,7 @@ public final class CriticalPathCalculator {
     }
 
     public static final long compute(final Project project) {
-        final OptionalLong criticalPathInDays = project.packages()
+        final OptionalLong criticalPathInDays = project.getWorkPackages()
                 .stream()
                 .mapToLong(CriticalPathCalculator::compute)
                 .max();
@@ -21,7 +21,7 @@ public final class CriticalPathCalculator {
     }
 
     public static final long compute(final WorkPackage workPackage) {
-        final OptionalLong criticalPathInDays = workPackage.tasks()
+        final OptionalLong criticalPathInDays = workPackage.getTasks()
                 .stream()
                 .mapToLong(CriticalPathCalculator::compute)
                 .max();
@@ -31,10 +31,10 @@ public final class CriticalPathCalculator {
     public static final long compute(final Task task) {
         long days = 0;
         if (Objects.nonNull(task)) {
-            if (Objects.isNull(task.parent())) {
-                days = task.duration().toDays();
+            if (Objects.isNull(task.getParent())) {
+                days = task.getDuration().toDays();
             } else {
-                days = task.duration().toDays() + CriticalPathCalculator.compute(task.parent());
+                days = task.getDuration().toDays() + CriticalPathCalculator.compute(task.getParent());
             }
         }
         return days;

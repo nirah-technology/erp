@@ -3,9 +3,7 @@ package io.nirahtech.erp.projects;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -16,7 +14,7 @@ public class TaskBuilder implements Builder<Task> {
     private String details = null;
     private Status status = Status.IDLE;
     private Task parent = null;
-    private List<Task> subTasks = new ArrayList<>();
+    private Set<Task> subTasks = new HashSet<>();
     private Set<Task> requiredTasks = new HashSet<>();
     private LocalDate startDate = null;
     private Duration duration = Duration.ofDays(1);
@@ -107,7 +105,7 @@ public class TaskBuilder implements Builder<Task> {
     public final Task build() {
         final Task task = new Task(new TaskIdentifier(this.id), this.name, this.details, this.status, this.parent, this.subTasks, this.requiredTasks, this.startDate, this.duration, this.priority, this.labels, this.documentations, this.referent, this.workers, this.maxWorkers);
         if (Objects.nonNull(this.parent)) {
-            // this.parent.subTasks().add(task);
+            this.parent.getSubTasks().add(task);
         }
         return task;
     }

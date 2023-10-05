@@ -1,5 +1,5 @@
 package io.nirahtech.erp.projects;
 
-public interface Builder<T> {
+interface Builder<T> {
     T build();
 }
