@@ -61,6 +61,7 @@ final class DefaultPlginRegistry implements PluginsRegistry {
     }
 
     private final Class<? extends Plugin> extractPluginClass(final JarFile jarFile) {
+        System.out.println(jarFile.getName());
         Class<? extends Plugin> pluginClass = null;
         final Collection<JarEntry> classesFromJarFile = this.extractClassesFromJarFile(jarFile);
         final ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -70,6 +71,8 @@ final class DefaultPlginRegistry implements PluginsRegistry {
             try {
                 final Class<?> loadedClass = classLoader.loadClass(className);
                 if (loadedClass != Plugin.class) {
+
+                    System.out.println(loadedClass);
                     if (Plugin.class.isAssignableFrom(loadedClass)) {
                         loadedPluginClassesFromJarFile.add(loadedClass);
                     }
@@ -129,9 +132,11 @@ final class DefaultPlginRegistry implements PluginsRegistry {
         this.createIfNotExists(pluginsFolder);
         final Collection<File> files = this.retrievePotentialsPluginsFiles(pluginsFolder);
         final Collection<JarFile> jarFiles = this.retrievePluginsJarFiles(files);
+        System.out.println("Jar files: " + jarFiles.size());
         final Collection<Class<? extends Plugin>> pluginsClasses = this.extractPluginsClasses(jarFiles);
+        System.out.println("Plugin class: " + pluginsClasses.size());
         final Collection<Plugin> plugins = this.loadPlugins(pluginsClasses);
-        System.out.println(plugins.size());
+        System.out.println("Plugins found: "+plugins.size());
         return plugins;
     }
     

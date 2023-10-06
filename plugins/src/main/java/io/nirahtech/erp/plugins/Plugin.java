@@ -1,7 +1,5 @@
 package io.nirahtech.erp.plugins;
 
-import java.lang.Runtime.Version;
-
 import javax.swing.JPanel;
 
 public interface Plugin {

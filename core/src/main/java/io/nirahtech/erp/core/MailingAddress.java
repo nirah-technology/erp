@@ -1,5 +1,5 @@
 package io.nirahtech.erp.core;
 
-public final record MailingAddress() {
+public final record MailingAddress(String address) {
     
 }

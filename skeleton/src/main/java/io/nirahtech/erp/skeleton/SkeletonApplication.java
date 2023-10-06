@@ -50,13 +50,16 @@ public final class SkeletonApplication {
     }
 
     public final static void main(final String[] commandLineArguments) {
+
         // Load configuration
         final Properties configuration = loadConfiguration(commandLineArguments);
 
         // Load plugins
         final File pluginsFolder = new File(configuration.getProperty(ApplicationConfiguration.PLUGINS_LOCATION));
+        System.out.println(pluginsFolder.getAbsolutePath());
         final PluginsRegistry pluginsRegistry = PluginsRegistryFactory.create();
         final Collection<Plugin> plugins = pluginsRegistry.load(pluginsFolder);
+        System.out.println(plugins.size());
 
         // Launch UI
         final UserInterface ui = UserInterfaceFactory.gui();

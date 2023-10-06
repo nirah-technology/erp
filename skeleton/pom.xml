@@ -19,12 +19,23 @@
   <dependencies>
     <dependency>
       <groupId>io.nirahtech</groupId>
+      <artifactId>core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>io.nirahtech</groupId>
       <artifactId>plugins</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
+import io.nirahtech.erp.core.Company;
 import io.nirahtech.erp.plugins.Plugin;
 import io.nirahtech.erp.skeleton.interfaces.UserInterface;
 

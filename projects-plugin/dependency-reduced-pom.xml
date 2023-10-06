@@ -7,8 +7,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.nirahtech</groupId>
-  <artifactId>skeleton</artifactId>
-  <name>skeleton</name>
+  <artifactId>projects-plugin</artifactId>
+  <name>projects-plugin</name>
   <version>1.0-SNAPSHOT</version>
   <url>http://www.example.com</url>
   <build>
@@ -29,9 +29,7 @@
             <configuration>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <transformers>
-                <transformer>
-                  <mainClass>io.nirahtech.erp.skeleton.SkeletonApplication</mainClass>
-                </transformer>
+                <transformer />
               </transformers>
             </configuration>
           </execution>
@@ -61,4 +59,7 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <properties>
+    <java.version>17</java.version>
+  </properties>
 </project>
