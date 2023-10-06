@@ -5,11 +5,11 @@ import java.io.File;
 public final class DocumentFactory {
     private DocumentFactory() { }
 
-    public static Document create(final String name) {
-        return new DocumentBuilder().file(new File(name)).build();
+    public static DocumentBuilder create(final String name) {
+        return new DocumentBuilder().file(new File(name));
     }
 
-    public static Document create(final File file) {
-        return new DocumentBuilder().file(file).build();
+    public static DocumentBuilder create(final File file) {
+        return new DocumentBuilder().file(file);
     }
 }

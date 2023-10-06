@@ -5,5 +5,5 @@ import java.io.Serializable;
 /**
  * Metadata
  */
-public record Metadata() implements Serializable {
+public record Metadata(String name, Object value) implements Serializable {
 }

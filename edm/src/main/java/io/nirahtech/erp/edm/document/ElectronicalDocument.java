@@ -249,4 +249,9 @@ public final class ElectronicalDocument implements Document {
         return false;
     }
 
+    @Override
+    public void restore() {
+        this.isArchived = false;
+    }
+
 }
