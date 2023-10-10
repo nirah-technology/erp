@@ -1,6 +1,10 @@
 package io.nirahtech.erp.webapp.interfaces.web.controllers;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import io.nirahtech.erp.webapp.infrastructure.security.OauthConfiguration;
 import io.nirahtech.libraries.sso.providers.IdentityProvider;
@@ -11,18 +15,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/login/oauth2/code/google")
+public class OAuth2GoogleServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogManager().getLogger("");
     private final IdentityProvider identityProvider;
 
-    public LoginServlet() {
+    public OAuth2GoogleServlet() {
         this.identityProvider = GoogleIdentityProvider.configure(OauthConfiguration.loadGoogleConfiguration());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(this.identityProvider.getAuthorizationCodeUri().toString());
+        String authorizationCode = URLDecoder.decode(request.getParameterMap().get("code")[0], StandardCharsets.UTF_8);
+        System.out.println(authorizationCode);
+        response.getWriter().println("AuthCode: " + authorizationCode);
+        response.setStatus(200);
+        // this.futureFirstSSOResponse.complete(super.authorizationCode);
     }
-
-
 }
