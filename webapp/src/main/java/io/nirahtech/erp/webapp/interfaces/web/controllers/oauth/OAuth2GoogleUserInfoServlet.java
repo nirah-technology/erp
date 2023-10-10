@@ -1,4 +1,4 @@
-package io.nirahtech.erp.webapp.interfaces.web.controllers;
+package io.nirahtech.erp.webapp.interfaces.web.controllers.oauth;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -16,12 +16,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/login/oauth2/code/google")
-public class OAuth2GoogleServlet extends HttpServlet {
+public class OAuth2GoogleUserInfoServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogManager().getLogger("");
     private final IdentityProvider identityProvider;
 
-    public OAuth2GoogleServlet() {
+    public OAuth2GoogleAuthorizationCodeServlet() {
         this.identityProvider = GoogleIdentityProvider.configure(OauthConfiguration.loadGoogleConfiguration());
     }
 
