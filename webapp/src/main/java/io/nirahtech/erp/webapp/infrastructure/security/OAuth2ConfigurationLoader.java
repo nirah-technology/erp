@@ -13,12 +13,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import io.nirahtech.erp.webapp.interfaces.web.controllers.OAuth2GoogleServlet;
-import io.nirahtech.libraries.sso.providers.IdentityProviderConfiguration;
+import io.nirahtech.libraries.oauth2.configuration.OAuth2Configuration;
 
-public final class OauthConfiguration {
-    private OauthConfiguration() { }
+public final class OAuth2ConfigurationLoader {
+    private OAuth2ConfigurationLoader() { }
 
-    public static final IdentityProviderConfiguration loadGoogleConfiguration() {
+    public static final OAuth2Configuration loadResourceFile(final String fileName) {
         String projectId = null;
         String clientId = null;
         String clientSecret = null;
@@ -29,7 +29,7 @@ public final class OauthConfiguration {
         URI accessTokenRedirectUri = null; 
         URI userInfoRedirectUri = null; 
         List<URI> redirectUris = new ArrayList<>();
-        InputStream inputStream = OAuth2GoogleServlet.class.getResourceAsStream("/google-credentials.json");
+        InputStream inputStream = OAuth2GoogleServlet.class.getResourceAsStream("/"+fileName);
         if (inputStream != null) {
             String text = null;
             try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
@@ -55,19 +55,18 @@ public final class OauthConfiguration {
                 // LOGGER.severe(String.format("Fail to process configuration parameter: %s", listOfRedirect));
             }
         } else {
-            // LOGGER.severe(String.format("Resource file not found: %s", "google-credentials.json"));
+            // LOGGER.severe(String.format("Resource file not found: %s", fileName));
         }
-        return new IdentityProviderConfiguration.Builder()
+        return new OAuth2Configuration.Builder()
             .projectId(projectId)
             .clientId(clientId)
             .clientSecret(clientSecret)
+            .authorizationCodeUri(authorizationCodeUri)
+            .authorizationCodeRedirectUri(authorizationCodeRedirectUri)
             .accessTokenUri(accessTokenUri)
-            .redirectUri(redirectUris)
+            .accessTokenRedirectUri(accessTokenRedirectUri)
             .userInfoUri(userInfoUri)
             .userInfoRedirectUri(userInfoRedirectUri)
-            .authorizationCodeRedirectUri(authorizationCodeRedirectUri)
-            .accessTokenRedirectUri(accessTokenRedirectUri)
-            .authorizationCodeUri(authorizationCodeUri)
             .build();
     }
 }
