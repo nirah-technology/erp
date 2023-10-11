@@ -12,7 +12,6 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import io.nirahtech.erp.webapp.interfaces.web.controllers.OAuth2GoogleServlet;
 import io.nirahtech.libraries.oauth2.configuration.OAuth2Configuration;
 
 public final class OAuth2ConfigurationLoader {
@@ -29,7 +28,7 @@ public final class OAuth2ConfigurationLoader {
         URI accessTokenRedirectUri = null; 
         URI userInfoRedirectUri = null; 
         List<URI> redirectUris = new ArrayList<>();
-        InputStream inputStream = OAuth2GoogleServlet.class.getResourceAsStream("/"+fileName);
+        InputStream inputStream = OAuth2ConfigurationLoader.class.getResourceAsStream("/"+fileName);
         if (inputStream != null) {
             String text = null;
             try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8.name())) {
