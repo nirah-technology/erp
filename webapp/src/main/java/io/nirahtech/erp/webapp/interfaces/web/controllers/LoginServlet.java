@@ -6,7 +6,6 @@ import io.nirahtech.erp.webapp.infrastructure.security.OAuth2ConfigurationLoader
 import io.nirahtech.libraries.oauth2.OAuth2;
 import io.nirahtech.libraries.oauth2.OAuth2Factory;
 import io.nirahtech.libraries.oauth2.configuration.OAuth2Configuration;
-import io.nirahtech.libraries.oauth2.data.Scope;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -28,6 +28,7 @@ public final class OAuth2ConfigurationLoader {
         URI accessTokenRedirectUri = null; 
         URI userInfoUri = null; 
         URI userInfoRedirectUri = null; 
+        String accessType = null;
         Set<Scope> scopes = new HashSet<>();
         InputStream inputStream = OAuth2ConfigurationLoader.class.getResourceAsStream("/"+fileName);
         if (inputStream != null) {
@@ -47,6 +48,7 @@ public final class OAuth2ConfigurationLoader {
             authorizationCodeRedirectUri = URI.create(configuration.get("auth_redirect_uri").toString());
             accessTokenRedirectUri = URI.create(configuration.get("token_redirect_uri").toString());
             userInfoRedirectUri = URI.create(configuration.get("user_info_redirect_uri").toString());
+            accessType = configuration.get("access_type").toString();
             Object listOfScopes = configuration.get("scopes");
             if (listOfScopes instanceof Collection) {
                 ((Collection<String>) listOfScopes).forEach((scope) -> scopes.add(new Scope(scope)));
@@ -67,6 +69,7 @@ public final class OAuth2ConfigurationLoader {
             .accessTokenRedirectUri(accessTokenRedirectUri)
             .userInfoUri(userInfoUri)
             .userInfoRedirectUri(userInfoRedirectUri)
+            .accessType(accessType)
             .scopes(scopes.toArray(new Scope[scopes.size()]))
             .build();
     }

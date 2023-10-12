@@ -1,17 +1,21 @@
 {
-    "client_id": "723967256995-g04vhniaoe42t6vhup44ka0j1lrflh1r.apps.googleusercontent.com",
     "project_id": "ride4ever",
+
+    "client_id": "723967256995-61l4pnk3a7jihck5dgaqqkbuhdtaibd1.apps.googleusercontent.com",
+    "client_secret": "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",
+    
     "auth_uri": "https://accounts.google.com/o/oauth2/v2/auth",
-    "auth_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/oauth2/code",
+    "auth_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/oauth2/google",
 
     "token_uri": "https://oauth2.googleapis.com/token",
-    "token_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/oauth2/token",
+    "token_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/oauth2/google",
 
     "user_info_uri": "https://openidconnect.googleapis.com/v1/userinfo",
-    "user_info_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/login/oauth2/code/google",
-    
+    "user_info_redirect_uri": "http://localhost:8080/webapp-1.0-SNAPSHOT/oauth2/google",
+
+    "access_type": "offline",    
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret": "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",
+    
     "scopes": [
         "openid"
     ]
