@@ -25,8 +25,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        oAuth2.generateAuthorizationCode(new Scope("openid"), new Scope("profile"));
-        response.sendRedirect(oAuth2.nextStep().toString());
+        oAuth2.generateAuthorizationCode();
+        response.sendRedirect(oAuth2.generateFullAuthorizationEndpoint().toString());
     }
 
 }

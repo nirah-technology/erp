@@ -1,9 +1,7 @@
 package io.nirahtech.erp.webapp.interfaces.web.controllers.oauth;
 
 import java.io.IOException;
-import java.util.Optional;
 
-import io.nirahtech.erp.webapp.infrastructure.WebResource;
 import io.nirahtech.erp.webapp.infrastructure.security.OAuth2ConfigurationLoader;
 import io.nirahtech.libraries.oauth2.OAuth2;
 import io.nirahtech.libraries.oauth2.OAuth2Factory;
@@ -13,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/oauth2/code")
 public class AuthorizationCodeCallbackServlet extends HttpServlet {
@@ -25,6 +24,10 @@ public class AuthorizationCodeCallbackServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(
+            request.getParameterMap()
+        );
         
+        HttpSession session = request.getSession(true);
     }
 }

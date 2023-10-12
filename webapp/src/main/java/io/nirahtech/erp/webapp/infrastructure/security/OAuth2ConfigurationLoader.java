@@ -3,16 +3,17 @@ package io.nirahtech.erp.webapp.infrastructure.security;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import io.nirahtech.libraries.oauth2.configuration.OAuth2Configuration;
+import io.nirahtech.libraries.oauth2.data.Scope;
 
 public final class OAuth2ConfigurationLoader {
     private OAuth2ConfigurationLoader() { }
@@ -22,12 +23,12 @@ public final class OAuth2ConfigurationLoader {
         String clientId = null;
         String clientSecret = null;
         URI authorizationCodeUri = null; 
-        URI accessTokenUri = null; 
-        URI userInfoUri = null; 
         URI authorizationCodeRedirectUri = null; 
+        URI accessTokenUri = null; 
         URI accessTokenRedirectUri = null; 
+        URI userInfoUri = null; 
         URI userInfoRedirectUri = null; 
-        List<URI> redirectUris = new ArrayList<>();
+        Set<Scope> scopes = new HashSet<>();
         InputStream inputStream = OAuth2ConfigurationLoader.class.getResourceAsStream("/"+fileName);
         if (inputStream != null) {
             String text = null;
@@ -46,9 +47,9 @@ public final class OAuth2ConfigurationLoader {
             authorizationCodeRedirectUri = URI.create(configuration.get("auth_redirect_uri").toString());
             accessTokenRedirectUri = URI.create(configuration.get("token_redirect_uri").toString());
             userInfoRedirectUri = URI.create(configuration.get("user_info_redirect_uri").toString());
-            Object listOfRedirect = configuration.get("redirect_uris");
-            if (listOfRedirect instanceof Collection) {
-                ((Collection<String>) listOfRedirect).forEach((redirectUri) -> redirectUris.add(URI.create(redirectUri)));
+            Object listOfScopes = configuration.get("scopes");
+            if (listOfScopes instanceof Collection) {
+                ((Collection<String>) listOfScopes).forEach((scope) -> scopes.add(new Scope(scope)));
                 // LOGGER.info("Google credentials confgiguration successfully loaded");
             } else {
                 // LOGGER.severe(String.format("Fail to process configuration parameter: %s", listOfRedirect));
@@ -66,6 +67,7 @@ public final class OAuth2ConfigurationLoader {
             .accessTokenRedirectUri(accessTokenRedirectUri)
             .userInfoUri(userInfoUri)
             .userInfoRedirectUri(userInfoRedirectUri)
+            .scopes(scopes.toArray(new Scope[scopes.size()]))
             .build();
     }
 }
