@@ -2,7 +2,7 @@ from abc import abstractmethod
 from shutil import copy
 from os import listdir, removedirs
 
-TOMCAT_WEBAPP_FOLDER: str = "/opt/apache-tomcat-10.1.14/webapps/"
+TOMCAT_WEBAPP_FOLDER: str = "/opt/apache-tomcat-10.1.13/webapps/"
 TARGET_FOLDER: str = "target/"
 
 class Installer:

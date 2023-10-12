@@ -3,6 +3,7 @@ package io.nirahtech.erp.webapp.interfaces.web.controllers.oauth;
 import java.io.IOException;
 import java.util.Objects;
 
+import io.nirahtech.erp.webapp.infrastructure.WebAppSession;
 import io.nirahtech.erp.webapp.infrastructure.security.OAuth2ConfigurationLoader;
 import io.nirahtech.libraries.oauth2.OAuth2;
 import io.nirahtech.libraries.oauth2.OAuth2Factory;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 public class OAuth2GoogleCallbackServlet extends HttpServlet {
     private static final String CODE_PARAMETER = "code";
     private final OAuth2 oAuth2;
+    private final WebAppSession webAppSession = WebAppSession.getInstance();
     
     public OAuth2GoogleCallbackServlet() {
         final OAuth2Configuration configuration = OAuth2ConfigurationLoader.loadResourceFile("oauth2.json");
@@ -35,6 +37,7 @@ public class OAuth2GoogleCallbackServlet extends HttpServlet {
             final String code = request.getParameter(CODE_PARAMETER);
             AccessToken accessToken = this.oAuth2.generateAccessToken(new AuthorizationCode(code));
             if (Objects.nonNull(accessToken)) {
+                this.webAppSession.setAccessToken(accessToken);
                 System.out.println("OK");
                 response.setStatus(200);
                 response.getWriter().println("Access Token: " + accessToken.value());

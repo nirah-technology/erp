@@ -19,7 +19,7 @@ public class DashboardServlet extends HttpServlet {
         if (Objects.isNull(session)) {
             response.sendRedirect("/login");
         } else {
-            request.getRequestDispatcher("/test.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 }
