@@ -1,6 +1,7 @@
 package io.nirahtech.erp.webapp.interfaces.web.controllers.oauth;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/oauth2/user-info")
 public class UserInfoServlet extends HttpServlet {
@@ -28,6 +30,11 @@ public class UserInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        HttpSession session = request.getSession(false);
+        if (Objects.isNull(session)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        } else {
+            
+        }
     }
 }

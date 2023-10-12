@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/oauth2/google")
 public class OAuth2GoogleCallbackServlet extends HttpServlet {
@@ -37,6 +38,12 @@ public class OAuth2GoogleCallbackServlet extends HttpServlet {
                 System.out.println("OK");
                 response.setStatus(200);
                 response.getWriter().println("Access Token: " + accessToken.value());
+                HttpSession session = request.getSession(true);
+                session.setMaxInactiveInterval(accessToken.expiresIn());
+                session.setAttribute("token", accessToken.value());
+                // request.getRequestDispatcher("/test.html").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/dashboard");
+
 
             } else {
                 System.out.println("KO");
