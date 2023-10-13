@@ -41,7 +41,7 @@ public class UserInfoServlet extends HttpServlet {
         } else {
             if (this.webAppSession.getAccessToken().isPresent()) {
                 AccessToken accessToken = this.webAppSession.getAccessToken().get();
-                Map<String, Object> userInfo = this.oAuth2.retrieveUserInfo(accessToken);
+                Map<String, String> userInfo = this.oAuth2.retrieveUserInfo(accessToken);
                 response.getWriter().println(userInfo.toString());
                 response.setStatus(HttpServletResponse.SC_OK);
             }

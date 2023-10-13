@@ -5,19 +5,10 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>NIRAH-TECH - ERP</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
 </head>
 <body>
-    <header></header>
-    <main>
-        <h1>Hello %name%</h1>
-        
-        <div id="root">OK</div>
-
-
-    </main>
-    <footer></footer>
+    <div id="root"></div>
+    <noscript>You browser does nt supported Javascript.</noscript>
 
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script><!-- comment -->

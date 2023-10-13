@@ -9,8 +9,8 @@ public record Company (
     MailingAddress mailingAddress,
     PhoneNumber phoneNumber,
     EmailAddress emailAddress,
-    String siret,
-    String siren,
+    Siret siret,
+    Siren siren,
     Set<Employee> employees,
     Set<WorkActivity> activities
 ) implements Entity {

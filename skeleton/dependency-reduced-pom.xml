@@ -7,8 +7,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.nirahtech</groupId>
-  <artifactId>skeleton</artifactId>
-  <name>skeleton</name>
+  <artifactId>erp-skeleton</artifactId>
+  <name>erp-skeleton</name>
   <version>1.0-SNAPSHOT</version>
   <url>http://www.example.com</url>
   <build>

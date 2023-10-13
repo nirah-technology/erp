@@ -2,36 +2,62 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>erp</artifactId>
     <groupId>io.nirahtech</groupId>
+    <artifactId>erp</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>io.nirahtech</groupId>
-  <artifactId>webapp</artifactId>
+  <artifactId>erp-webapp</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>webapp</name>
-  <!-- FIXME change it to the project's website -->
+  <name>erp-webapp</name>
   <url>http://www.example.com</url>
 
   <dependencies>
+
+    <!-- Nirah-Tech -->
     <dependency>
       <groupId>io.nirahtech.libraries</groupId>
       <artifactId>oauth2</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
-      <scope>provided</scope>
+      <groupId>io.nirahtech</groupId>
+      <artifactId>erp-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
+
+    <!-- Java Jakarta -->
+    <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.10.1</version>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>6.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+    <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>3.1.0</version>
+    </dependency>
+
+    <!-- Google JSON -->
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
+
+    <!-- SQLite -->
+    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.43.0.0</version>
     </dependency>
 
   </dependencies>

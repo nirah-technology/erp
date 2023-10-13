@@ -10,10 +10,10 @@
   </parent>
   
   <groupId>io.nirahtech</groupId>
-  <artifactId>projects</artifactId>
+  <artifactId>erp-projects</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>projects</name>
+  <name>erp-projects</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

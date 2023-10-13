@@ -8,10 +8,10 @@
   </parent>
 
   <groupId>io.nirahtech</groupId>
-  <artifactId>skeleton</artifactId>
+  <artifactId>erp-skeleton</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>skeleton</name>
+  <name>erp-skeleton</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -19,12 +19,12 @@
   <dependencies>
     <dependency>
       <groupId>io.nirahtech</groupId>
-      <artifactId>core</artifactId>
+      <artifactId>erp-core</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>io.nirahtech</groupId>
-      <artifactId>plugins</artifactId>
+      <artifactId>erp-plugins</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>

@@ -7,12 +7,9 @@ import React, { useState } from "react";
 import Home from "./Home";
 
 function App(props) {
-  const [state, setState] = useState<String>("");
-  
   return (
     <div>
-      <p>ok</p>
-      <Home />
+      <p>AppComponent</p>
     </div>
   );
 }

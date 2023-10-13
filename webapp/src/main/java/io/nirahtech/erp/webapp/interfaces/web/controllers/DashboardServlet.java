@@ -17,7 +17,7 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (Objects.isNull(session)) {
-            response.sendRedirect("/login");
+            response.sendRedirect(request.getContextPath() +"/login");
         } else {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }

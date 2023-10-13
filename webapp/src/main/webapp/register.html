@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>NIRAH-TECH - ERP</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>Login</li>
+            </ul>
+        </nav>
+    </header>
+    <div id="root">
+        <section>
+            <h1>Je suis</h1>
+            <select name="denomination" id="">
+                <option disabled selected>Dénomination...</option>
+                <option value="company">Employeur</option>
+                <option value="employee">Salarié</option>
+            </select>
+            <button type="button">Suivant</button>
+        </section>
+        <section>
+            <h1>Employeur</h1>
+            <input type="text" name="" id="" placeholder="Nom" required minlength="1" maxlength="64" />
+            <input type="number" name="" id="" placeholder="SIREN" required minlength="9" maxlength="9" />
+            <input type="number" name="" id="" placeholder="SIRET" minlength="14" maxlength="14" />
+            <button type="cancel">Précédent</button>
+            <button type="button">Sauvegarder</button>
+        </section>
+        <section>
+            <h1>Salarié</h1>
+            <input type="text" name="" id="" placeholder="Nom" required minlength="1" maxlength="64" />
+            <input type="number" name="" id="" placeholder="N° Securité Sociale" required minlength="13" maxlength="13" />
+            <button type="cancel">Précédent</button>
+            <button type="button">Sauvegarder</button>
+        </section>
+    </div>
+    <footer>
+        <p>2023 - Tous droits réservés. Développé par METIVIER Nicolas</p>
+    </footer>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script><!-- comment -->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel" src="js/nirahtech-erp-webapp.min.js"></script>
+    
+</body>
+</html>

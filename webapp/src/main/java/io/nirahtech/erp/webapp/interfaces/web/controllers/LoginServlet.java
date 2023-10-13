@@ -1,6 +1,7 @@
 package io.nirahtech.erp.webapp.interfaces.web.controllers;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import io.nirahtech.erp.webapp.infrastructure.security.OAuth2ConfigurationLoader;
 import io.nirahtech.libraries.oauth2.OAuth2;
@@ -24,8 +25,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        oAuth2.generateAuthorizationCode();
-        response.sendRedirect(oAuth2.generateFullAuthorizationEndpoint().toString());
+        if (Objects.isNull(request.getSession(false))) {
+            oAuth2.generateAuthorizationCode();
+            response.sendRedirect(oAuth2.generateFullAuthorizationEndpoint().toString());
+        } else {
+            response.sendRedirect(request.getContextPath());
+        }
     }
 
 }
