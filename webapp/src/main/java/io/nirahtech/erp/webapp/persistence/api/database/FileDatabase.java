@@ -12,4 +12,5 @@ abstract sealed class FileDatabase implements Database permits ReadOnlyDatabase,
     public File getFile() {
         return this.file;
     }
+    
 }

@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public final class DatabaseCluster<T extends Database>  {
+public final class DatabaseCluster<T extends Database> implements SqlQuery, SqlCommand {
 
     private final T master;
     private final Set<T> nodes = new HashSet<>();
@@ -31,6 +33,7 @@ public final class DatabaseCluster<T extends Database>  {
     public final T master() {
         return this.master;
     }
+    
     
     public final Collection<T> nodes() {
         return Collections.unmodifiableCollection(this.nodes);
@@ -57,4 +60,14 @@ public final class DatabaseCluster<T extends Database>  {
             });
         }
     }
+
+    @Override
+    public ResultSet executeQuery(String sqlRequest) throws SQLException {
+        return ((SqlQuery) this.master).executeQuery(sqlRequest);
+    }
+    @Override
+    public int executeUpdate(String sqlRequest) throws SQLException {
+        return ((SqlCommand) this.master).executeUpdate(sqlRequest);
+    }
+
 }

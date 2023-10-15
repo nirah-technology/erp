@@ -1,29 +1,46 @@
 package io.nirahtech.erp.webapp.persistence.dao.companies;
 
-import java.sql.Connection;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import io.nirahtech.erp.core.Company;
-import io.nirahtech.erp.webapp.persistence.sqlite.SQLiteHelper;
+import io.nirahtech.erp.webapp.persistence.api.database.DatabaseCluster;
+import io.nirahtech.erp.webapp.persistence.api.database.DatabaseClusterFactory;
+import io.nirahtech.erp.webapp.persistence.api.database.ReadOnlyDatabase;
+import io.nirahtech.erp.webapp.persistence.api.database.WriteOnlyDatabase;
 
 public final class SQLiteCompaniesDao implements CompaniesDao {
 
+    private final DatabaseCluster<ReadOnlyDatabase> readOnlyDabtaseCulster;
+    private final DatabaseCluster<WriteOnlyDatabase> writeOnlyDabtaseCulster;
 
     public SQLiteCompaniesDao() {
+        try {
+            this.readOnlyDabtaseCulster = DatabaseClusterFactory.createReadOnlyCluster(null, null, 0);
+            this.writeOnlyDabtaseCulster = DatabaseClusterFactory.createWriteOnlyCluster(null, null, 0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
     public Collection<Company> findAll() {
+        List<Company> companie = new ArrayList<>();
+        try {
+            final ResultSet resultSet = this.readOnlyDabtaseCulster.executeQuery("SELECT * FROM Company;");
 
-        try (Connection connection = SQLiteHelper.createSession()) {
-            
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        return null;
+        return companie;
     }
 
     @Override
