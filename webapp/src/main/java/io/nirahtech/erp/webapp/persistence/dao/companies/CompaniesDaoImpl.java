@@ -1,8 +1,5 @@
 package io.nirahtech.erp.webapp.persistence.dao.companies;
 
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,37 +7,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 import io.nirahtech.erp.core.Company;
-import io.nirahtech.erp.webapp.persistence.api.database.DatabaseCluster;
-import io.nirahtech.erp.webapp.persistence.api.database.DatabaseClusterFactory;
-import io.nirahtech.erp.webapp.persistence.api.database.ReadOnlyDatabase;
-import io.nirahtech.erp.webapp.persistence.api.database.WriteOnlyDatabase;
+import io.nirahtech.libraries.database.DatabasesClusterFactory;
+import io.nirahtech.libraries.database.HybridCluster;
 
-public final class SQLiteCompaniesDao implements CompaniesDao {
+public final class CompaniesDaoImpl implements CompaniesDao {
 
-    private final DatabaseCluster<ReadOnlyDatabase> readOnlyDabtaseCulster;
-    private final DatabaseCluster<WriteOnlyDatabase> writeOnlyDabtaseCulster;
+    private final HybridCluster hybridCulster;
 
-    public SQLiteCompaniesDao() {
-        try {
-            this.readOnlyDabtaseCulster = DatabaseClusterFactory.createReadOnlyCluster(null, null, 0);
-            this.writeOnlyDabtaseCulster = DatabaseClusterFactory.createWriteOnlyCluster(null, null, 0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+    public CompaniesDaoImpl() {
+        this.hybridCulster = DatabasesClusterFactory.createHybridCluster(null, null, 0);
     }
 
     @Override
     public Collection<Company> findAll() {
-        List<Company> companie = new ArrayList<>();
-        try {
-            final ResultSet resultSet = this.readOnlyDabtaseCulster.executeQuery("SELECT * FROM Company;");
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return companie;
+        return this.hybridCulster.readOnlyCluster().select(Company.class);
     }
 
     @Override
