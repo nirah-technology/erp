@@ -1,9 +1,18 @@
 # **ERP WebApp**
 
-## **Requirements**
-- Java JDK 21
-- Tomcat 10.1
-- Node 
+## **<span style="color:#FF">Requirements</span>**
+
+| TECHNOLOGY | VERSION|
+|---|---|
+| Java | 21 |
+| Apache Tomcat | 10.1 |
+| Node | 20.7 |
+
+**The application was successfully tested on these Operating Systems**
+| OS | VERSION|
+|---|---|
+| MICROSOFT Windows | 11 |
+| LINUX Fedora | *TBD* |
 
 -----
 

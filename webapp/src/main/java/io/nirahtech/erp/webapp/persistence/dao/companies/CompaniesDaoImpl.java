@@ -1,8 +1,6 @@
 package io.nirahtech.erp.webapp.persistence.dao.companies;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +20,6 @@ public final class CompaniesDaoImpl implements CompaniesDao {
     public Collection<Company> findAll() {
         return this.hybridCulster.readOnlyCluster().select(Company.class);
     }
-
     @Override
     public Optional<Company> findById(UUID id) {
         // TODO Auto-generated method stub
