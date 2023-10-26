@@ -1,0 +1,6 @@
+version: ''
+configs:
+networks:
+secrets:
+services:
+volumes:
