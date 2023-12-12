@@ -4,18 +4,26 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Version
- */
-public record Version(int major, int minor, Optional<Integer> security, Optional<String> tag) {
+public class Version {
+    private final int major;
+    private final int minor;
+    private final Optional<Integer> security;
+    private final Optional<String> tag;
 
-    private static final String MAJOUR_FORMAT = "(\\d+)";
+    private static final String MAJOR_FORMAT = "(\\d+)";
     private static final String MINOR_FORMAT = "(\\.(\\d+))";
     private static final String SECURITY_FORMAT = "(\\.(\\d+))?";
     private static final String TAG_FORMAT = "(-(\\w+))?";
 
-    private static final String VERSION_FORMAT = "^(" + MAJOUR_FORMAT + MINOR_FORMAT + SECURITY_FORMAT + TAG_FORMAT
+    private static final String VERSION_FORMAT = "^(" + MAJOR_FORMAT + MINOR_FORMAT + SECURITY_FORMAT + TAG_FORMAT
             + ")$";
+
+    public Version(int major, int minor, Optional<Integer> security, Optional<String> tag) {
+        this.major = major;
+        this.minor = minor;
+        this.security = security;
+        this.tag = tag;
+    }
 
     public static final Version parse(final String version) {
         final Pattern pattern = Pattern.compile(VERSION_FORMAT);
@@ -34,5 +42,21 @@ public record Version(int major, int minor, Optional<Integer> security, Optional
             tag = Optional.ofNullable(matcher.group(8));
         }
         return new Version(major, minor, security, tag);
+    }
+
+    public int getMajor() {
+        return major;
+    }
+
+    public int getMinor() {
+        return minor;
+    }
+
+    public Optional<Integer> getSecurity() {
+        return security;
+    }
+
+    public Optional<String> getTag() {
+        return tag;
     }
 }
