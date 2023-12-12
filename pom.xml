@@ -17,9 +17,7 @@
     <module>bank</module>
     <module>projects</module>
     <module>edm</module>
-    <module>skeleton</module>
     <module>plugins</module>
     <module>workingtime</module>
-    <module>projects-plugin</module>  
     <module>webapp</module></modules>
 </project>
