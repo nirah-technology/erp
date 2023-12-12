@@ -5,14 +5,21 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASE || ''}>
+      <ScrollToTop />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,0 +1,26 @@
+div.Logo-Component {
+    position: relative;
+    margin: auto auto;
+    text-align: center;
+    vertical-align: middle;
+}
+div.Logo-Component > a {
+    position: relative;
+    padding: 0;
+    margin: auto auto;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: rgba(255,255,255,255);
+    font-size: 1rem;
+    line-height: 5rem;
+}
+div.Logo-Component > a > img {
+    position: relative;
+    height: 3.5rem;
+    margin: auto auto;
+    text-align: center;
+    vertical-align: middle;
+}

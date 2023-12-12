@@ -1,0 +1,23 @@
+section.Home-Component > ul {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    /* display: inline-flex; */
+    text-align: center;
+}
+section.Home-Component > ul > li {
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+    display: inline-flex;
+    margin: 1rem;
+}
+section.Home-Component > sub {
+    color: rgba(200, 200, 200, 255);
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5rem;
+    font-size: 1rem;
+}

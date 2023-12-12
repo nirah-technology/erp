@@ -1,0 +1,60 @@
+nav.MainMenu-Component {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(0,0,0,255);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 100;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+nav.MainMenu-Component > ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    height: 100%;
+}
+nav.MainMenu-Component > ul#left {
+    position: relative;
+    float: left;
+    left: 10rem;
+}
+nav.MainMenu-Component > ul#right {
+    position: absolute;
+    float: right;
+    right: 10rem;
+}
+
+nav.MainMenu-Component > ul#right > li {
+    position: relative;
+    margin: auto auto;
+    padding: 0;
+    list-style: none;
+    border-bottom: solid 0.2rem rgba(161, 9, 5, 0);
+    height: 100%;
+}
+
+nav.MainMenu-Component > ul#right > li:hover {
+    border-bottom: solid 0.2rem rgba(161, 9, 5, 255);
+}
+nav.MainMenu-Component > ul#right > li > a {
+    position: relative;
+    font-size: 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(200, 200, 200, 255);
+    display: block;
+    text-align: center;
+    padding: 1rem 1rem;
+    line-height: 3em;
+}
+
+nav.MainMenu-Component > ul#right > li > a.active {
+    background-color: rgba(161, 9, 5, 255);
+    color: rgba(255, 255, 255, 255);
+}

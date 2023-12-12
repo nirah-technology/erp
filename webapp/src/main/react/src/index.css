@@ -1,13 +1,70 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Roboto', 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background-color: rgba(10,10,10,255);
+  color: rgba(239, 239, 239, 255);
+  font-size: 1em;
+}
+
+* {
+  font-family: 'Roboto', 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1em;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+strong {
+  color: rgba(255, 23, 16, 255);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-family: "Roboto-Black", inherit;
+}
+
+button, input[type=button], a.Button {
+  display: block;
+  color: rgba(239, 239, 239, 255);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: solid 0.2rem rgba(161, 9, 5, 255);
+  background-color: rgba(161, 9, 5, 255);
+  text-align: center;
+  padding: 1rem 1rem;
+  box-shadow: inset 0px px 5rem 1rem rgba(0,0,0,255);
+  cursor: pointer;
+}
+
+a.Button.KnowMore {
+  width: 10rem;
+}
+
+button:hover, input[type=button]:hover, a.Button:hover {
+  border: solid 0.2rem rgba(255, 23, 16, 255);
+  background-color: rgba(255, 23, 16, 255);
+}
+
+section > h2 {
+  font-size: 2rem;
+  margin: 10rem 0rem;
+}
+
+hr {
+  border: solid 1px rgba(255,0,0,255);
+  width: 50%;
+  margin: 5rem auto;
+  margin-bottom: 10rem;
 }
