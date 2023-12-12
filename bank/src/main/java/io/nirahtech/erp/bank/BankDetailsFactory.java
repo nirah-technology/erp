@@ -11,23 +11,23 @@ public final class BankDetailsFactory {
         final AccountNumber accountNumber = new AccountNumber(accountNumberUUID.toString().replace("-", "").substring(0, 30));
         return new BankDetails(
             accountHolder, 
-            bank.name(), 
-            bank.code(), 
+            bank.getName(), 
+            bank.getCode(), 
             "null", 
             accountNumber, 
             "null", 
             new InternationalBankAccountNumber(
-                bank.country(),
+                bank.getCountry(),
                 76,
                 new BasicBankAccountNumber(
-                    bank.code(),
+                    bank.getCode(),
                     branchCode,
                     accountNumber
                 )
             ), 
             new BankIdentifierCode(
-                bank.code(),
-                bank.country(),
+                bank.getCode(),
+                bank.getCountry(),
                 branchCode,
                 Optional.empty()
             ));

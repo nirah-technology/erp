@@ -5,12 +5,35 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
-public final record BankIdentifierCode (
-    BankCode bankNameCode,
-    Locale country,
-    BranchCode bankBranchCode,
-    Optional<String> branchCode
-) {
+public class BankIdentifierCode {
+    private final BankCode bankNameCode;
+    private final Locale country;
+    private final BranchCode bankBranchCode;
+    private final Optional<String> branchCode;
+
+    public BankIdentifierCode(BankCode bankNameCode, Locale country, BranchCode bankBranchCode, Optional<String> branchCode) {
+        this.bankNameCode = bankNameCode;
+        this.country = country;
+        this.bankBranchCode = bankBranchCode;
+        this.branchCode = branchCode;
+    }
+    public BankCode getBankNameCode() {
+        return bankNameCode;
+    }
+
+    public Locale getCountry() {
+        return country;
+    }
+
+    public BranchCode getBankBranchCode() {
+        return bankBranchCode;
+    }
+
+    public Optional<String> getBranchCode() {
+        return branchCode;
+    }
+
+
 
     private static final int MAX_BIC_SIZE = 11;
 

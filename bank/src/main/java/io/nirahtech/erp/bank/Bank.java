@@ -6,15 +6,60 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-public final record Bank(
-    String name,
-    BankCode code,
-    BranchCode branchCode,
-    Locale country,
-    Set<BankAccount> accounts,
-    Set<AccountHolder> customers,
-    FinancialTransactionExecutor financialTransactionExecutor
-) implements BankAccountManager, BankCustomerManager {
+public class Bank implements BankAccountManager, BankCustomerManager {
+    private final String name;
+    private final BankCode code;
+    private final BranchCode branchCode;
+    private final Locale country;
+    private final Set<BankAccount> accounts;
+    private final Set<AccountHolder> customers;
+    private final FinancialTransactionExecutor financialTransactionExecutor;
+
+    public Bank(
+        String name,
+        BankCode code,
+        BranchCode branchCode,
+        Locale country,
+        Set<BankAccount> accounts,
+        Set<AccountHolder> customers,
+        FinancialTransactionExecutor financialTransactionExecutor
+    ) {
+        this.name = name;
+        this.code = code;
+        this.branchCode = branchCode;
+        this.country = country;
+        this.accounts = accounts;
+        this.customers = customers;
+        this.financialTransactionExecutor = financialTransactionExecutor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BankCode getCode() {
+        return code;
+    }
+
+    public BranchCode getBranchCode() {
+        return branchCode;
+    }
+
+    public Locale getCountry() {
+        return country;
+    }
+
+    public Set<BankAccount> getAccounts() {
+        return Collections.unmodifiableSet(accounts);
+    }
+
+    public Set<AccountHolder> getCustomers() {
+        return Collections.unmodifiableSet(customers);
+    }
+
+    public FinancialTransactionExecutor getFinancialTransactionExecutor() {
+        return financialTransactionExecutor;
+    }
 
     @Override
     public void registerNewCustomer(AccountHolder customer) {
@@ -27,11 +72,10 @@ public final record Bank(
     public void disaffiliateCustomer(AccountHolder customer) {
         if (Objects.nonNull(customer)) {
             this.customers.remove(customer);
-            customer.bankAccounts().forEach(account -> {
+            customer.getBankAccounts().forEach(account -> {
                 this.closeBankAccount(account);
             });
         }
-
     }
 
     @Override
@@ -57,5 +101,4 @@ public final record Bank(
     public Collection<BankAccount> listBankAccounts() {
         return Collections.unmodifiableCollection(this.accounts);
     }
-    
 }

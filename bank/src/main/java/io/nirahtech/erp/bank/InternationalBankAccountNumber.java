@@ -4,11 +4,28 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.Objects;
 
-public final record InternationalBankAccountNumber(
-    Locale country,
-    int checkDigit,
-    BasicBankAccountNumber accountNumber
-) {
+public class InternationalBankAccountNumber {
+    private final Locale country;
+    private final int checkDigit;
+    private final BasicBankAccountNumber accountNumber;
+
+    public InternationalBankAccountNumber(Locale country, int checkDigit, BasicBankAccountNumber accountNumber) {
+        this.country = country;
+        this.checkDigit = checkDigit;
+        this.accountNumber = accountNumber;
+    }
+    public Locale getCountry() {
+        return country;
+    }
+
+    public int getCheckDigit() {
+        return checkDigit;
+    }
+
+    public BasicBankAccountNumber getAccountNumber() {
+        return accountNumber;
+    }
+
 
     private static final int MAX_IBAN_SIZE = 34;
     

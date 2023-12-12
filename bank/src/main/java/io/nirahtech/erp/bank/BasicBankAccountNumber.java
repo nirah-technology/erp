@@ -3,15 +3,20 @@ package io.nirahtech.erp.bank;
 import java.text.ParseException;
 import java.util.Objects;
 
-public record BasicBankAccountNumber(
-    BankCode bankCode,
-    BranchCode branchCode,
-    AccountNumber accountNumber
-) {
-    
+public class BasicBankAccountNumber {
+    private final BankCode bankCode;
+    private final BranchCode branchCode;
+    private final AccountNumber accountNumber;
+
     private static final int MAX_IBAN_SIZE = 30;
 
-    public static final BasicBankAccountNumber parse(final String bban)  throws ParseException {
+    public BasicBankAccountNumber(BankCode bankCode, BranchCode branchCode, AccountNumber accountNumber) {
+        this.bankCode = bankCode;
+        this.branchCode = branchCode;
+        this.accountNumber = accountNumber;
+    }
+
+    public static BasicBankAccountNumber parse(final String bban) throws ParseException {
         if (Objects.isNull(bban)) {
             throw new ParseException("BBAN cannot be 'null'.", 0);
         }
@@ -27,8 +32,20 @@ public record BasicBankAccountNumber(
         final String bankCodeValue = bban.substring(0, 4);
         final String branchCodeValue = bban.substring(4, 9);
         final String accountNumberValue = bban.substring(9);
-        
-        return new BasicBankAccountNumber(new BankCode(bankCodeValue), new BranchCode(branchCodeValue), new AccountNumber(accountNumberValue));
+
+        return new BasicBankAccountNumber(new BankCode(bankCodeValue), new BranchCode(branchCodeValue),
+                new AccountNumber(accountNumberValue));
     }
 
+    public BankCode getBankCode() {
+        return bankCode;
+    }
+
+    public BranchCode getBranchCode() {
+        return branchCode;
+    }
+
+    public AccountNumber getAccountNumber() {
+        return accountNumber;
+    }
 }

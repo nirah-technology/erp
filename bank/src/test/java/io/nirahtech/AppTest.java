@@ -42,9 +42,9 @@ public class AppTest
         resistanceBank.registerNewCustomer(jane);
         
         final BankAccount ccpJohn = galacticBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, john);
-        ccpJohn.credit(new BigDecimal(25_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
+        ccpJohn.credit(new BigDecimal(25_000.00F), Currency.getInstance(ccpJohn.getBank().getCountry()));
         final BankAccount ccpJane = resistanceBank.openNewBankAccount(BankAccountType.CURRENT_ACCOUNT, jane);
-        ccpJane.credit(new BigDecimal(30_000.00F), Currency.getInstance(ccpJohn.getBank().country()));
+        ccpJane.credit(new BigDecimal(30_000.00F), Currency.getInstance(ccpJohn.getBank().getCountry()));
 
         assertEquals(new BigDecimal(25_000.00F).floatValue(), ccpJohn.getBalance().floatValue());
         assertEquals(new BigDecimal(30_000.00F).floatValue(), ccpJane.getBalance().floatValue());
