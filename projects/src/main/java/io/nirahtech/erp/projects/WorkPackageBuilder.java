@@ -3,6 +3,7 @@ package io.nirahtech.erp.projects;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -58,19 +59,19 @@ public class WorkPackageBuilder implements Builder<WorkPackage> {
         return this;
     }
     public final WorkPackageBuilder documentations(final File... documentations) {
-        this.documentations.addAll(Set.of(documentations));
+        this.documentations.addAll(Arrays.asList(documentations));
         return this;
     }
     public final WorkPackageBuilder labels(final String... labels) {
-        this.labels.addAll(Set.of(labels));
+        this.labels.addAll(Arrays.asList(labels));
         return this;
     }
     public final WorkPackageBuilder tasks(final Task... tasks) {
-        this.tasks.addAll(Set.of(tasks));
+        this.tasks.addAll(Arrays.asList(tasks));
         return this;
     }
     public final WorkPackageBuilder milestones(final Milestone... milestones) {
-        this.milestones.addAll(Set.of(milestones));
+        this.milestones.addAll(Arrays.asList(milestones));
         return this;
     }
 

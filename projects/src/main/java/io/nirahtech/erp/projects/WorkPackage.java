@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import io.nirahtech.erp.projects.utils.CriticalPathCalculator;
 
@@ -76,26 +78,26 @@ public final class WorkPackage implements Serializable {
 		this.tasks.add(task);
 	}
 	public void addTasks(final Task... tasks) {
-		this.tasks.addAll(Set.of(tasks));
+		this.tasks.addAll(Arrays.asList(tasks));
 	}
 	public void addLabel(final String label) {
 		this.labels.add(label);
 	}
 	public void addLabels(final String... labels) {
-		this.labels.addAll(Set.of(labels));
+		this.labels.addAll(Arrays.asList(labels));
 	}
 	public void addDocumentation(final File documentation) {
 		this.documentations.add(documentation);
 	}
 	public void addDocumentations(final File... documentations) {
-		this.documentations.addAll(Set.of(documentations));
+		this.documentations.addAll(Arrays.asList(documentations));
 	}
 	
 	public void addMilestone(final Milestone milestone) {
 		this.milestones.add(milestone);
 	}
 	public void addMilestones(final Milestone... milestones) {
-		this.milestones.addAll(Set.of(milestones));
+		this.milestones.addAll(Arrays.asList(milestones));
 	}
 	public Collection<File> getDocumentations() {
 		return documentations;
@@ -146,7 +148,7 @@ public final class WorkPackage implements Serializable {
 
 	public Optional<LocalDate> getEstimatedEndDate() {
 		Optional<LocalDate> estimatedEndDate = Optional.empty();
-		List<Task> list = this.tasks.stream().toList();
+		List<Task> list = this.tasks.stream().collect(Collectors.toList());
 		if (!list.isEmpty()) {
 			Task mostFutureTask = list.get(0);
 

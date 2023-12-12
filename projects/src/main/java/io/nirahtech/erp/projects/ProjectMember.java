@@ -1,7 +1,13 @@
 package io.nirahtech.erp.projects;
 
-public final record ProjectMember(
-    ProjectMemberIdentifier id
-) {
-    
+public class ProjectMember {
+    private final ProjectMemberIdentifier id;
+
+    public ProjectMember(ProjectMemberIdentifier id) {
+        this.id = id;
+    }
+
+    public ProjectMemberIdentifier getId() {
+        return id;
+    }
 }

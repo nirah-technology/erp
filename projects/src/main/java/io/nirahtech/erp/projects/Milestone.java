@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -67,13 +68,13 @@ public final class Milestone implements Serializable {
 		this.labels.add(label);
 	}
 	public void addLabels(final String... labels) {
-		this.labels.addAll(Set.of(labels));
+		this.labels.addAll(Arrays.asList(labels));
 	}
 	public void addDocumentation(final File documentation) {
 		this.documentations.add(documentation);
 	}
 	public void addDocumentations(final File... documentations) {
-		this.documentations.addAll(Set.of(documentations));
+		this.documentations.addAll(Arrays.asList(documentations));
 	}
 	public Collection<File> getDocumentations() {
 		return documentations;

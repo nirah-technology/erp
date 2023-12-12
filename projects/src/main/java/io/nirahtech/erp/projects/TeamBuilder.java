@@ -1,5 +1,6 @@
 package io.nirahtech.erp.projects;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -37,7 +38,7 @@ public class TeamBuilder implements Builder<Team> {
         return this;
     }
     public final TeamBuilder members(final ProjectMember... members) {
-        this.members.addAll(Set.of(members));
+        this.members.addAll(Arrays.asList(members));
         return this;
     }
 

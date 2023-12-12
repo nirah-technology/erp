@@ -2,8 +2,14 @@ package io.nirahtech.erp.projects;
 
 import java.util.UUID;
 
-public final record ProjectIdentifier(
-    UUID value
-) {
-    
+public class ProjectIdentifier {
+    private final UUID value;
+
+    public ProjectIdentifier(UUID value) {
+        this.value = value;
+    }
+
+    public UUID getValue() {
+        return value;
+    }
 }

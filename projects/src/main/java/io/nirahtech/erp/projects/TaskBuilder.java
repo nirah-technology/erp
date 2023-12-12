@@ -3,6 +3,7 @@ package io.nirahtech.erp.projects;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -57,11 +58,11 @@ public class TaskBuilder implements Builder<Task> {
     }
 
     public final TaskBuilder subTasks(final Task... subTasks) {
-        this.subTasks.addAll(Set.of(subTasks));
+        this.subTasks.addAll(Arrays.asList(subTasks));
         return this;
     }
     public final TaskBuilder requiredTasks(final Task... requiredTasks) {
-        this.requiredTasks.addAll(Set.of(requiredTasks));
+        this.requiredTasks.addAll(Arrays.asList(requiredTasks));
         return this;
     }
 
@@ -84,15 +85,15 @@ public class TaskBuilder implements Builder<Task> {
         return this;
     }
     public final TaskBuilder labels(final String... labels) {
-        this.labels.addAll(Set.of(labels));
+        this.labels.addAll(Arrays.asList(labels));
         return this;
     }
     public final TaskBuilder documentations(final File... documentations) {
-        this.documentations.addAll(Set.of(documentations));
+        this.documentations.addAll(Arrays.asList(documentations));
         return this;
     }
     public final TaskBuilder workers(final ProjectMember... workers) {
-        this.workers.addAll(Set.of(workers));
+        this.workers.addAll(Arrays.asList(workers));
         return this;
     }
 

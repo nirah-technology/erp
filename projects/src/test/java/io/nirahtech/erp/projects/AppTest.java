@@ -1,9 +1,6 @@
 package io.nirahtech.erp.projects;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,29 +50,30 @@ public class AppTest {
 				.requiredTasks(task4, task5, task6, task7)
 				.build();
 
-			WorkPackage package1 = new WorkPackage(
-				new WorkPackageIdentifier(UUID.randomUUID()), 
-				"Lot 1", 
-				null, 
-				null, 
-				LocalDate.now(), 
-				Duration.ofDays(1), 
-				Status.IDLE, 
-				Set.of(), 
-				Set.of(), 
-				Set.of(
-					task1,
-					task2,
-					task3,
-					task4,
-					task5,
-					task6,
-					task7,
-					task8), 
-				Set.of());
+		// WorkPackage package1 = new WorkPackage(
+		// 	new WorkPackageIdentifier(UUID.randomUUID()), 
+		// 	"Lot 1", 
+		// 	null, 
+		// 	null, 
+		// 	LocalDate.now(), 
+		// 	Duration.ofDays(1), 
+		// 	Status.IDLE, 
+		// 	Arrays.asList(), 
+		// 	Arrays.asList(), 
+		// 	Arrays.asList(
+		// 		task1,
+		// 		task2,
+		// 		task3,
+		// 		task4,
+		// 		task5,
+		// 		task6,
+		// 		task7,
+		// 		task8), 
+		// 	Arrays.asList());
 		Project clonesTrainingProject = new ProjectBuilder()
 				.name("Clones Traning")
-				.workPackages(package1).build();
+				// .workPackages(package1)
+				.build();
 
 
 		System.out.println(clonesTrainingProject.computeMaxCriticalPathValue());
