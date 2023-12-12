@@ -40,10 +40,10 @@ public class OAuth2GoogleCallbackServlet extends HttpServlet {
                 this.webAppSession.setAccessToken(accessToken);
                 System.out.println("OK");
                 response.setStatus(200);
-                response.getWriter().println("Access Token: " + accessToken.value());
+                response.getWriter().println("Access Token: " + accessToken.getValue());
                 HttpSession session = request.getSession(true);
-                session.setMaxInactiveInterval(accessToken.expiresIn());
-                session.setAttribute("token", accessToken.value());
+                session.setMaxInactiveInterval(accessToken.getExpiresIn());
+                session.setAttribute("token", accessToken.getValue());
                 // request.getRequestDispatcher("/test.html").forward(request, response);
                 response.sendRedirect(request.getContextPath() + "/dashboard");
 
