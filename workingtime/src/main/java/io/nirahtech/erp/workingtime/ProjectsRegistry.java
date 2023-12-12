@@ -28,7 +28,7 @@ public final class ProjectsRegistry {
     }
 
     public final Optional<Project> findByName(final String name) {
-        return this.projects.stream().filter(project -> project.name().equalsIgnoreCase(name)).findFirst();
+        return this.projects.stream().filter(project -> project.getName().equalsIgnoreCase(name)).findFirst();
     }
     
     public final void unregister(final Project project) {

@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public final class WorkTimesheet implements Imputable {
     private static final int TOTAL_MINUTES_IN_ONE_HOUR = 60;
@@ -39,15 +40,15 @@ public final class WorkTimesheet implements Imputable {
         final AtomicInteger workTimeInMinutes = new AtomicInteger(0);
 
         workedTimes.forEach(workTime -> {
-            switch (workTime.timeUnit()) {
+            switch (workTime.getTimeUnit()) {
                 case MINUTES:
-                    workTimeInMinutes.getAndAdd(workTime.number());
+                    workTimeInMinutes.getAndAdd(workTime.getNumber());
                     break;
                 case HOURS:
-                    workTimeInMinutes.getAndAdd(workTime.number() * TOTAL_MINUTES_IN_ONE_HOUR);
+                    workTimeInMinutes.getAndAdd(workTime.getNumber() * TOTAL_MINUTES_IN_ONE_HOUR);
                     break;
                 case DAYS:
-                    workTimeInMinutes.getAndAdd(workTime.number() * TOTAL_MINUTES_IN_ONE_DAY_OF_7_HOURS);
+                    workTimeInMinutes.getAndAdd(workTime.getNumber() * TOTAL_MINUTES_IN_ONE_DAY_OF_7_HOURS);
                     break;
                 default:
                     break;
@@ -89,9 +90,9 @@ public final class WorkTimesheet implements Imputable {
         final LocalDate realTo = to;
 
         final List<Imputation> filteredImputations = this.imputations.stream()
-                .filter(workTime -> workTime.date().isAfter(realFrom))
-                .filter(workTime -> workTime.date().isBefore(realTo))
-                .toList();
+                .filter(workTime -> workTime.getDate().isAfter(realFrom))
+                .filter(workTime -> workTime.getDate().isBefore(realTo))
+                .collect(Collectors.toList());
         return this.computeWorkedTime(filteredImputations, timeUnit);
         
     }
@@ -119,10 +120,10 @@ public final class WorkTimesheet implements Imputable {
         final LocalDate realTo = to;
 
         final List<Imputation> filteredImputations = this.imputations.stream()
-                .filter(workTime -> workTime.date().isAfter(realFrom))
-                .filter(workTime -> workTime.date().isBefore(realTo))
-                .filter(workTime -> workTime.project().equals(project))
-                .toList();
+                .filter(workTime -> workTime.getDate().isAfter(realFrom))
+                .filter(workTime -> workTime.getDate().isBefore(realTo))
+                .filter(workTime -> workTime.getProject().equals(project))
+                .collect(Collectors.toList());
         return this.computeWorkedTime(filteredImputations, timeUnit);
     }
 
