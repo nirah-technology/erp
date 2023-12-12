@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.Runtime.Version;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -72,14 +72,14 @@ public final class ElectronicalDocument implements Document {
     @Override
     public void addTags(Tag... tags) {
         if (Objects.nonNull(tags)) {
-            this.tags.addAll(Set.of(tags));
+            this.tags.addAll(Arrays.asList(tags));
         }
     }
 
     @Override
     public void deleteTags(Tag... tags) {
         if (Objects.nonNull(tags)) {
-            this.tags.removeAll(Set.of(tags));
+            this.tags.removeAll(Arrays.asList(tags));
         }
     }
 
@@ -91,14 +91,14 @@ public final class ElectronicalDocument implements Document {
     @Override
     public void addComments(Comment... comments) {
         if (Objects.nonNull(comments)) {
-            this.comments.addAll(Set.of(comments));
+            this.comments.addAll(Arrays.asList(comments));
         }
     }
 
     @Override
     public void deleteComments(Comment... comments) {
         if (Objects.nonNull(comments)) {
-            this.comments.removeAll(Set.of(comments));
+            this.comments.removeAll(Arrays.asList(comments));
         }
     }
 
@@ -110,14 +110,14 @@ public final class ElectronicalDocument implements Document {
     @Override
     public void addAnnexes(Document... annexes) {
         if (Objects.nonNull(annexes)) {
-            this.annexes.addAll(Set.of(annexes));
+            this.annexes.addAll(Arrays.asList(annexes));
         }
     }
 
     @Override
     public void removeAnnexes(Document... annexes) {
         if (Objects.nonNull(annexes)) {
-            this.annexes.removeAll(Set.of(annexes));
+            this.annexes.removeAll(Arrays.asList(annexes));
         }
     }
 
@@ -169,7 +169,7 @@ public final class ElectronicalDocument implements Document {
     @Override
     public void addModifications(Modification... modifications) {
         if (Objects.nonNull(modifications)) {
-            this.modifications.addAll(Set.of(modifications));
+            this.modifications.addAll(Arrays.asList(modifications));
         }
     }
 

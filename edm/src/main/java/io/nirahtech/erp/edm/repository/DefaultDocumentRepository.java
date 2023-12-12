@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import io.nirahtech.erp.edm.document.Document;
 import io.nirahtech.erp.edm.document.DocumentIdentifier;
@@ -103,42 +104,42 @@ public class DefaultDocumentRepository implements DocumentRepository {
 
     @Override
     public Collection<Document> findAllByFileName(String fileName) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getFileName().equalsIgnoreCase(fileName)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getFileName().equalsIgnoreCase(fileName)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByExtension(String extension) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getExtension().equalsIgnoreCase(extension)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getExtension().equalsIgnoreCase(extension)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByCreationDateTime(LocalDateTime dateTime) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getCreationDateTime().equals(dateTime)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getCreationDateTime().equals(dateTime)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByModificationDateTime(LocalDateTime dateTime) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getModificationDateTime().equals(dateTime)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getModificationDateTime().equals(dateTime)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByOwner(String owner) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getOwner().equals(owner)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getOwner().equals(owner)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByTag(Tag tag) {
-        return this.cachedDatasource.values().stream().filter(document -> document.getTags().contains(tag)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.getTags().contains(tag)).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllByArchived(boolean isArchived) {
-        return this.cachedDatasource.values().stream().filter(document -> document.isArchived() == isArchived).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.isArchived() == isArchived).collect(Collectors.toList());
     }
 
     @Override
     public Collection<Document> findAllWithValue(String value) {
-        return this.cachedDatasource.values().stream().filter(document -> document.search(value)).toList();
+        return this.cachedDatasource.values().stream().filter(document -> document.search(value)).collect(Collectors.toList());
     }
 
 }
