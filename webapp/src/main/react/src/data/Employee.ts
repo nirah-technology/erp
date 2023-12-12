@@ -30,6 +30,16 @@ class Employee extends Human {
     this.hiringDate = hiringDate;
   }
 
+  constructor(
+    human: Human,
+    phoneNumber: PhoneNumber,
+    emailAddress: EmailAddress,
+    mailingAddress: MailingAddress,
+    jobTitle: string,
+    hiringDate: Date) {
+      this(human.getFirstName(), human.getLastName(), human.getBirthDate(), human.getGender(), phoneNumber, emailAddress, mailingAddress, jobTitle, hiringDate);
+  }
+
   getEmailAddress(): EmailAddress {
     return this.emailAddress;
   }

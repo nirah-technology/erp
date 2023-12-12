@@ -2,16 +2,28 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CompanyView.css';
 import Company from '../../data/Company';
+import Employee from '../../data/Employee';
 
 interface Properties {
     company: Company;
+    employee: Employee;
 }
 
-function CompanyView({company}: Properties) {
+function CompanyView({company, employee}: Properties) {
     const [myCompany] = useState<Company>(company);
+    const [me] = useState<Employee>(employee);
     
     return (
         <section className='Home-Component' id='home'>
+            <div className='identity'>
+                <h1>{myCompany.getName()}</h1>
+                <p>Date de création: {myCompany.getCreationDate().toString()}</p>
+                <p>Téléphone: {myCompany.getPhoneNumber().toString()}</p>
+                <p>Salariés: {myCompany.getEmployees().size}</p>
+                <p>SIRET: {String(myCompany.getSiret().getCode())}</p>
+                <p>SIREN: {String(myCompany.getSiren().getCode())}</p>
+                <p>Adresse: {String(myCompany.getMailingAddress().getAddress())}</p>
+            </div>
             <div className='identity'>
                 <h1>{myCompany.getName()}</h1>
                 <p>Date de création: {myCompany.getCreationDate().toString()}</p>

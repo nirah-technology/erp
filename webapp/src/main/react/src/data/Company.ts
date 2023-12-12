@@ -6,6 +6,80 @@ import Siren from "./Siren";
 import Siret from "./Siret";
 import WorkActivity from "./WorkActivity";
 
+class Builder {
+  private name: string = '';
+    private creationDate: Date = new Date();
+    private mailingAddress!: MailingAddress;
+    private phoneNumber!: PhoneNumber;
+    private emailAddress!: EmailAddress;
+    private siret!: Siret;
+    private siren!: Siren;
+    private employees: Set<Employee> = new Set<Employee>();
+    private activities: Set<WorkActivity> = new Set<WorkActivity>();
+
+    constructor() {}
+
+    withName(name: string): Builder {
+        this.name = name;
+        return this;
+    }
+
+    withCreationDate(creationDate: Date): Builder {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    withMailingAddress(mailingAddress: MailingAddress): Builder {
+        this.mailingAddress = mailingAddress;
+        return this;
+    }
+
+    withPhoneNumber(phoneNumber: PhoneNumber): Builder {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    withEmailAddress(emailAddress: EmailAddress): Builder {
+        this.emailAddress = emailAddress;
+        return this;
+    }
+
+    withSiret(siret: Siret): Builder {
+        this.siret = siret;
+        return this;
+    }
+
+    withSiren(siren: Siren): Builder {
+        this.siren = siren;
+        return this;
+    }
+
+    withEmployee(employee: Employee): Builder {
+        this.employees.add(employee);
+        return this;
+    }
+
+    withActivity(activity: WorkActivity): Builder {
+        this.activities.add(activity);
+        return this;
+    }
+
+    build(): Company {
+        return new Company(
+            this.name,
+            this.creationDate,
+            this.mailingAddress,
+            this.phoneNumber,
+            this.emailAddress,
+            this.siret,
+            this.siren,
+            this.employees,
+            this.activities
+        );
+    }
+
+}
+
 class Company {
     private readonly name: string;
     private readonly creationDate: Date;
@@ -74,6 +148,11 @@ class Company {
     getActivities(): Set<WorkActivity> {
       return this.activities;
     }
+
+    static builder(): Builder {
+      return new Builder();
+    }
+
   }
 
   export default Company;
