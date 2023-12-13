@@ -1,0 +1,44 @@
+section.WorkingTimeView-Component table {
+    border-collapse: collapse;
+    border: solid 1px rgba(161, 9, 5, 255);
+}
+section.WorkingTimeView-Component table > thead {
+    background-color: rgba(161, 9, 5, 255);
+}
+section.WorkingTimeView-Component table > thead th {
+    text-transform: uppercase;
+    padding: 1em 1em;
+}
+section.WorkingTimeView-Component table > tbody > tr >  * {
+    padding: 1em 1em;
+}
+
+section.WorkingTimeView-Component table > tbody th {
+    text-transform: uppercase;
+    text-align: left;
+}
+
+section.WorkingTimeView-Component table > tbody ul,
+section.WorkingTimeView-Component table > tbody ul > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    vertical-align: middle;
+}
+section.WorkingTimeView-Component table > tbody ul > li {
+}
+section.WorkingTimeView-Component table > tbody tr:hover {
+    background-color: rgba(161, 9, 5, 0.5);
+}
+
+section.WorkingTimeView-Component table > tbody ul > li span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 5em;
+    color: rgba(255,150,0,1);
+    height: 1.5em;
+    line-height: 1.5em;
+    margin: 0.25em 0.25em;
+    font-weight: bold;
+    text-align: center;
+}

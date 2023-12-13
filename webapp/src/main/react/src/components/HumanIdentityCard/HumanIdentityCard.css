@@ -1,0 +1,45 @@
+div.HumanIdentityCard-Component {
+    display: inline-flex;
+    position: relative;
+    vertical-align: top;
+    justify-content: space-between;
+}
+
+div.HumanIdentityCard-Component > div {
+    margin: 1em;
+    border-radius: 10px;
+    background-color: rgba(30,30,30,255);
+    text-align: center;
+    padding: 1em;
+}
+
+
+div.HumanIdentityCard-Component > div.profile-resume > img {
+    width: 12em;
+    height: 12em;
+    border-radius: 50%;
+    background-color: aquamarine;
+    margin: 2em 2em;
+}
+
+div.HumanIdentityCard-Component > div.profile-resume > h2 {
+    margin: 0;
+    padding: 1em 1em;
+    margin-bottom: 2em;
+    color: rgba(255, 23, 16, 255);
+    font-size: 1.75em;
+}
+div.HumanIdentityCard-Component > div.profile-details > h3 {
+    color: rgba(255, 23, 16, 255);
+    font-size: 1.5em;
+}
+
+div.HumanIdentityCard-Component > div.profile-details > table {
+    text-align: left;
+    margin: 2em 4em;
+}
+
+div.HumanIdentityCard-Component > div.profile-details > table th {
+    padding: 1em;
+    text-transform: uppercase;
+}

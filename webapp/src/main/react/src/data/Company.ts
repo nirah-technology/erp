@@ -141,12 +141,12 @@ class Company {
       return this.siren;
     }
   
-    getEmployees(): Set<Employee> {
-      return this.employees;
+    getEmployees(): Array<Employee> {
+      return Array.from(this.employees);
     }
   
-    getActivities(): Set<WorkActivity> {
-      return this.activities;
+    getActivities(): Array<WorkActivity> {
+      return Array.from(this.activities);
     }
 
     static builder(): Builder {

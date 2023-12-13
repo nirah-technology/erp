@@ -24,6 +24,7 @@ function CompaniesView({companies, onSelectCompany}: Properties) {
                         {company.getName()}
                     </Link>
                 </li>)}
+                <button type='button'>Join New Company</button>
 
         </section>
     );

@@ -28,5 +28,9 @@ class Human {
     getGender(): Gender {
       return this.gender;
     }
+
+    is(other: Human): boolean {
+      return (other.getFirstName().toLowerCase() == this.firstName.toLowerCase()) && (other.getLastName().toLowerCase() == this.lastName.toLowerCase()) && (other.getBirthDate().toString() == this.birthDate.toString()) && (other.getGender() == this.gender);
+    }
   }
 export default Human;  

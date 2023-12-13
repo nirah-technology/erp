@@ -14,5 +14,9 @@ class EmailAddress {
     getDomain(): string {
         return this.domain;
     }
+
+    toString(): string {
+        return `${this.username}@${this.domain}`;
+    }
 }
 export default EmailAddress;

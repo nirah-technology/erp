@@ -1,0 +1,20 @@
+div.JobResumeCard-Component {
+    position: relative;
+    background-color: rgba(30,30,30,255);
+    display: block;
+    width: 20em;
+    text-align: center;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+div.JobResumeCard-Component > h2 {
+    color: rgba(255, 23, 16, 255);
+    font-size: 1.5em;
+}
+
+div.JobResumeCard-Component > p {
+    margin: 1em auto;
+    font-style: italic;
+    font-size: 1em;
+}
