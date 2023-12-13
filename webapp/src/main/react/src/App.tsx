@@ -19,6 +19,9 @@ import CompanyView from './views/Company/CompanyView';
 import CompaniesView from './views/Companies/CompaniesView';
 import Employee from './data/Employee';
 import WorkingTimeView from './views/WorkingTime/WorkingTimeView';
+import Imputation from './data/Imputation';
+import TimeUnit from './data/TimeUnit';
+import Project from './data/Project';
 
 function App() {
   const [companyName] = useState<string>(String(process.env.REACT_APP_COMPANY_NAME));
@@ -38,6 +41,7 @@ function App() {
       .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .build();
+      meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(new Date(), 4, TimeUnit.HOURS, new Project("ERP"), ""));
     const meAsAdelyaEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(new EmailAddress("nicolas.metivier", "adelya.com"))
       .withHiringDate(new Date(2023, 1, 2))

@@ -28,7 +28,7 @@ div.WorkTimeWeekSheet-Component > table > tbody ul > li {
 div.WorkTimeWeekSheet-Component > table > tbody ul > li {
 }
 div.WorkTimeWeekSheet-Component > table > tbody tr:hover {
-    background-color: rgba(161, 9, 5, 0.5);
+    background-color: rgba(161, 9, 5, 0.25);
 }
 
 div.WorkTimeWeekSheet-Component > table > tbody ul > li span {

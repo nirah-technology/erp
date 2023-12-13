@@ -1,0 +1,13 @@
+enum TimeUnit {
+    NANOSECONDS = 'NANOSECONDS',
+    MICROSECONDS = 'MICROSECONDS',
+    MILLISECONDS = 'MILLISECONDS',
+    SECONDS = 'SECONDS',
+    MINUTES = 'MINUTES',
+    HOURS = 'HOURS',
+    DAYS = 'DAYS',
+    MONTHS = 'MONTHS',
+    YEARS = 'YEARS'
+}
+
+export default TimeUnit;

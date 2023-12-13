@@ -9,15 +9,15 @@ interface Properties {
 
 function EmployeeIdentityCard({employee}: Properties) {
 
-    const formatDate = (birthDate: Date): string => {
-        const day = String(birthDate.getDate()).padStart(2, '0');
-        const month = String(birthDate.getMonth() + 1).padStart(2, '0');
-        const year = birthDate.getFullYear();
+    const formatDate = (date: Date): string => {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
 
-    const computeAge = (birthDate: Date): number => {
-        return (new Date()).getFullYear() - birthDate.getFullYear();
+    const computeAge = (date: Date): number => {
+        return (new Date()).getFullYear() - date.getFullYear();
     }
   
   return (

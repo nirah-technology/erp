@@ -1,9 +1,11 @@
+import WorkTimeWeekSheet from '../components/WorkTimeWeekSheet/WorkTimeWeekSheet';
 import EmailAddress from './EmailAddress';
 import EmploymentContract from './EmploymentContract';
 import Gender from './Gender';
 import Human  from './Human';
 import MailingAddress from './MailingAddress';
 import PhoneNumber from './PhoneNumber';
+import WorkTimeSheet from './WorkTimeSheet';
 
 class Builder {
   private human!: Human;
@@ -13,6 +15,7 @@ class Builder {
   private jobTitle!: string;
   private hiringDate!: Date;
   private employmentContract!: EmploymentContract;
+  private worktimeSheet: WorkTimeSheet = new WorkTimeSheet();
 
   constructor(human: Human) {
     this.human = human;
@@ -42,6 +45,10 @@ class Builder {
     this.employmentContract = employmentContract;
     return this;
   }
+  withWorkTimeSheet(worktimeSheet: WorkTimeSheet): Builder {
+    this.worktimeSheet = worktimeSheet;
+    return this;
+  }
   build(): Employee {
     return new Employee(
       this.human.getFirstName(),
@@ -53,7 +60,8 @@ class Builder {
       this.mailingAddress,
       this.jobTitle,
       this.hiringDate,
-      this.employmentContract
+      this.employmentContract,
+      this.worktimeSheet
     );
   }
 
@@ -66,6 +74,7 @@ class Employee extends Human {
   private jobTitle: string;
   private readonly hiringDate: Date;
   private readonly employmentContract: EmploymentContract;
+  private readonly worktimeSheet: WorkTimeSheet;
 
   constructor(
     firstName: string,
@@ -77,7 +86,8 @@ class Employee extends Human {
     mailingAddress: MailingAddress,
     jobTitle: string,
     hiringDate: Date,
-    employmentContract: EmploymentContract
+    employmentContract: EmploymentContract,
+    worktimeSheet: WorkTimeSheet
   ) {
     super(firstName, lastName, birthDate, gender);
     this.phoneNumber = phoneNumber;
@@ -86,6 +96,7 @@ class Employee extends Human {
     this.jobTitle = jobTitle;
     this.hiringDate = hiringDate;
     this.employmentContract = employmentContract;
+    this.worktimeSheet = worktimeSheet;
   }
 
   getEmailAddress(): EmailAddress {
@@ -110,6 +121,9 @@ class Employee extends Human {
   
   getEmploymentContract(): EmploymentContract {
     return this.employmentContract;
+  }
+  getWorkTimeSheet(): WorkTimeSheet {
+    return this.worktimeSheet;
   }
 
   public static builder(human: Human): Builder {
