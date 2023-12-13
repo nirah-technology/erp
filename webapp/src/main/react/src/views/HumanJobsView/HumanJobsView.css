@@ -1,0 +1,14 @@
+section.Me-Component  > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+}
+section.Me-Component  > ul > li {
+    margin: 1em;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+
+}

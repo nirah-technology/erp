@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './CompanyView.css';
+import './CompanyProjectsView.css';
 import Company from '../../data/Company';
 import Employee from '../../data/Employee';
 import EmployeeIdentityCard from '../../components/EmployeeIdentityCard/EmployeeIdentityCard';
@@ -8,37 +8,37 @@ import CompanyIdentityCard from '../../components/CompanyIdentityCard/CompanyIde
 
 interface Properties {
     company: Company|null;
-    employee: Employee|null;
 }
 
-function CompanyView({company, employee}: Properties) {
+function CompanyProjectsView({company}: Properties) {
     const [myCompany, setMyCompany] = useState<Company>();
-    const [meAsEmployee, setMeAsEmployee] = useState<Employee>();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!company || !employee) {
+        if (!company) {
             navigate("/");
         } else {
-            setMeAsEmployee(employee);
             setMyCompany(company);
         }
     }, []);
 
-    if (!myCompany || !meAsEmployee) {
+    if (!myCompany) {
         navigate("/");
         return (null);
     }
     return (
-        <section className='Home-Component' id='home'>
-            <CompanyIdentityCard company={myCompany} />
-            <hr />
-            <EmployeeIdentityCard employee={meAsEmployee} />
-            <hr />
-            <Link className='Button' to={"working-time"}>See My WorkTime</Link>
+        <section className='CompanyProjectsView-Component' id='home'>
+            <h1>Projets</h1>
+            <ul>
+                {Array.from(myCompany.getProjectsRegistry().getProjects()).map((project) => (
+                    <li>
+                        <h2>{project.getName()}</h2>
+                    </li>
+                ))}
+            </ul>
 
         </section>
     );
 }
 
-export default CompanyView;
+export default CompanyProjectsView;

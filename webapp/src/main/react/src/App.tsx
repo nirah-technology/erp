@@ -13,26 +13,32 @@ import MailingAddress from './data/MailingAddress';
 import PhoneNumber from './data/PhoneNumber';
 import Siren from './data/Siren';
 import Siret from './data/Siret';
-import HomeView from './views/Home/HomeView';
-import MeView from './views/Me/MeView';
-import CompanyView from './views/Company/CompanyView';
-import CompaniesView from './views/Companies/CompaniesView';
+import HomeView from './views/HomeView/HomeView';
+import MeView from './views/MeView/MeView';
+import CompanyView from './views/CompanyView/CompanyView';
 import Employee from './data/Employee';
-import WorkingTimeView from './views/WorkingTime/WorkingTimeView';
+import WorkingTimeView from './views/WorkingTimeView/WorkingTimeView';
 import Imputation from './data/Imputation';
 import TimeUnit from './data/TimeUnit';
 import Project from './data/Project';
+import Client from './data/Client';
+import HumanProfileView from './views/HumanProfileView/HumanProfileView';
+import HumanJobsView from './views/HumanJobsView/HumanJobsView';
+import HumanPlanningView from './views/HumanPlanningView/HumanPlanningView';
+import CompanyProfileView from './views/CompanyProfileView/CompanyProfileView';
+import EmployeeProfileView from './views/EmployeeProfileView/EmployeeProfileView';
+import CompanyProjectsView from './views/CompanyProjectsView/CompanyProjectsView';
 
 function App() {
   const [companyName] = useState<string>(String(process.env.REACT_APP_COMPANY_NAME));
-  const [meAsHuman, setMeAsHuman] = useState<Human|null>(null);
-  const [meAsEmployee, setMeAsEmployee] = useState<Employee|null>(null);
+  const [meAsHuman, setMeAsHuman] = useState<Human | null>(null);
+  const [meAsEmployee, setMeAsEmployee] = useState<Employee | null>(null);
   const [myCompanies, setMyCompanies] = useState<Array<Company>>([]);
-  const [mySelectedCompany, setMySelectedCompany] = useState<Company|null>(null);
+  const [mySelectedCompany, setMySelectedCompany] = useState<Company | null>(null);
 
   useEffect(() => {
 
-    const meHuman: Human = new Human("Nicolas", "METIVIER", new Date(1993,0,6), Gender.MAN);
+    const meHuman: Human = new Human("Nicolas", "METIVIER", new Date(1993, 0, 6), Gender.MAN);
     setMeAsHuman(meHuman);
     const meAsNirahEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(new EmailAddress("nicolas.metivier", "nirah-technology.fr"))
@@ -41,7 +47,6 @@ function App() {
       .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .build();
-      meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(new Date(), 4, TimeUnit.HOURS, new Project("ERP"), ""));
     const meAsAdelyaEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(new EmailAddress("nicolas.metivier", "adelya.com"))
       .withHiringDate(new Date(2023, 1, 2))
@@ -71,8 +76,14 @@ function App() {
       .withEmployee(meAsAdelyaEmployee)
       .build();
 
-      setMyCompanies(new Array(nirah, adelya));
-      setMySelectedCompany(nirah);
+    const meAsNirahClient: Client = new Client();
+    const erpProjectForNirah: Project = new Project("ERP", meAsNirahClient);
+    nirah.getProjectsRegistry().register(erpProjectForNirah);
+
+    meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(new Date(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
+
+    setMyCompanies(new Array(nirah, adelya));
+    setMySelectedCompany(nirah);
 
   }, []);
 
@@ -82,19 +93,22 @@ function App() {
   }
 
   return (
-     <Routes>
-        {/* Dashboard de mes activité */}
-        <Route path="/" element={<Main company={companyName} />}> 
-          <Route index element={<HomeView company={companyName} />} />
-          {/* Résumé sur moi en tant qu'employé */}
-          <Route path="/me" element={<MeView human={meAsHuman} companies={myCompanies} onSelectCompany={changeSelectedCompanyHandler} />} />
-          {/* Liste de mes entrerpsies */}
-          <Route path="/my-companies" element={<CompaniesView companies={myCompanies} onSelectCompany={changeSelectedCompanyHandler} />} />
-          <Route path="/my-companies/:siret" element={<CompanyView company={mySelectedCompany} employee={meAsEmployee} />} />
-          <Route path="/my-companies/:siret/working-time" element={<WorkingTimeView company={mySelectedCompany} employee={meAsEmployee} />} />
-          {/* List */}
-        </Route>
-      </Routes>
+    <Routes>
+      {/* Dashboard de mes activité */}
+      <Route path="/" element={<Main company={companyName} selectedCompany={mySelectedCompany} />}>
+        <Route index element={<HomeView company={companyName} />} />
+        {/* Résumé sur moi en tant qu'employé */}
+        <Route path="/me" element={<MeView human={meAsHuman} companies={myCompanies} onSelectCompany={changeSelectedCompanyHandler} />} />
+        <Route path="/me/profile" element={<HumanProfileView human={meAsHuman} />} />
+        <Route path="/me/planning" element={<HumanPlanningView human={meAsHuman} companies={myCompanies} />} />
+        <Route path="/me/jobs" element={<HumanJobsView human={meAsHuman} companies={myCompanies} onSelectCompany={changeSelectedCompanyHandler} />} />
+        {/* Liste de mes entrerpsies */}
+        <Route path="/work" element={<CompanyProfileView company={mySelectedCompany} employee={meAsEmployee} />} />
+        <Route path="/work/profile" element={<EmployeeProfileView employee={meAsEmployee} />} />
+        <Route path="/work/projects" element={<CompanyProjectsView company={mySelectedCompany} />} />
+        {/* List */}
+      </Route>
+    </Routes>
   );
 }
 

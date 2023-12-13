@@ -30,7 +30,7 @@ nav.MainMenu-Component > ul#right {
     right: 10rem;
 }
 
-nav.MainMenu-Component > ul#right > li {
+nav.MainMenu-Component > ul#right  li {
     position: relative;
     margin: auto auto;
     padding: 0;
@@ -39,10 +39,10 @@ nav.MainMenu-Component > ul#right > li {
     height: 100%;
 }
 
-nav.MainMenu-Component > ul#right > li:hover {
+nav.MainMenu-Component > ul#right li:hover {
     border-bottom: solid 0.2rem rgba(161, 9, 5, 255);
 }
-nav.MainMenu-Component > ul#right > li > a {
+nav.MainMenu-Component > ul#right li > a {
     position: relative;
     font-size: 1em;
     text-decoration: none;
@@ -54,7 +54,20 @@ nav.MainMenu-Component > ul#right > li > a {
     line-height: 3em;
 }
 
-nav.MainMenu-Component > ul#right > li > a.active {
+nav.MainMenu-Component > ul#right li > a.active {
     background-color: rgba(161, 9, 5, 255);
     color: rgba(255, 255, 255, 255);
+}
+
+nav.MainMenu-Component > ul#right > li ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+    background-color: black;
+
+}
+nav.MainMenu-Component > ul#right > li:hover  ul {
+    display: block;
 }

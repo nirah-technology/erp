@@ -20,7 +20,7 @@ function CompaniesView({companies, onSelectCompany}: Properties) {
         <section className='Home-Component' id='home'>
             <h2>Entreprises</h2>
                 {myCompanies.map(company => <li>
-                    <Link to={"/my-companies/".concat(String(company.getSiren().getCode()))} onClick={(e) => onLinkClickedHandler(e, company)}>
+                    <Link to={"/work/".concat(String(company.getSiren().getCode()))} onClick={(e) => onLinkClickedHandler(e, company)}>
                         {company.getName()}
                     </Link>
                 </li>)}

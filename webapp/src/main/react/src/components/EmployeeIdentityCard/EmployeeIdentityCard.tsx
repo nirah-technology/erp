@@ -28,7 +28,7 @@ function EmployeeIdentityCard({employee}: Properties) {
             <p>{employee.getJobTitle()}</p>
         </div>
         <div className='profile-details'>
-            <h3>Profile Employé</h3>
+            <h3>Informations Professionnelles</h3>
             <table>
                 <tbody>
                     <tr>

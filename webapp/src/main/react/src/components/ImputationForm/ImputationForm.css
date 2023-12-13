@@ -1,0 +1,32 @@
+div.ImputationForm-Component {
+    position: relative;
+    display: block;
+    width: auto;
+}
+
+div.ImputationForm-Component > form {
+    margin: 0 auto;
+    max-width: 30em;
+}
+div.ImputationForm-Component > form > div {
+    padding: 1em 1em;
+}
+
+div.ImputationForm-Component > form > div > label {
+    display: block;
+    padding: 1em 0em;
+}
+
+div.ImputationForm-Component > form > div > input,
+div.ImputationForm-Component > form > div > textarea,
+div.ImputationForm-Component > form > div > select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5em 1em;
+}
+
+div.ImputationForm-Component > form > div > textarea {
+    resize: none;
+    height: 10em;
+}

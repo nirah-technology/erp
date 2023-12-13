@@ -22,8 +22,8 @@ function JobResumeCard({ employee, company, onSelectCompany }: Properties) {
         <div className='JobResumeCard-Component'>
             <h2>{company.getName()}</h2>
             <p>{employee.getJobTitle()}</p>
-            <Link className='Button' to={"/my-companies/".concat(String(company.getSiren().getCode()))} onClick={(e) => onLinkClickedHandler(e, company)}>
-                Voir
+            <Link className='Button' to={"/work"} onClick={(e) => onLinkClickedHandler(e, company)}>
+                Sélectionner
             </Link>
         </div>
     );

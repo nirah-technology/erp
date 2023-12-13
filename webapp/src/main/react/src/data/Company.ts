@@ -2,6 +2,7 @@ import EmailAddress from "./EmailAddress";
 import Employee from "./Employee";
 import MailingAddress from "./MailingAddress";
 import PhoneNumber from "./PhoneNumber";
+import ProjectsRegistry from "./ProjectsRegistry";
 import Siren from "./Siren";
 import Siret from "./Siret";
 import WorkActivity from "./WorkActivity";
@@ -16,6 +17,7 @@ class Builder {
     private siren!: Siren;
     private employees: Set<Employee> = new Set<Employee>();
     private activities: Set<WorkActivity> = new Set<WorkActivity>();
+    private clients: Set<Client> = new Set<Client>();
 
     constructor() {}
 
@@ -64,6 +66,11 @@ class Builder {
         return this;
     }
 
+    withClient(client: Client): Builder {
+        this.clients.add(client);
+        return this;
+    }
+
     build(): Company {
         return new Company(
             this.name,
@@ -74,7 +81,8 @@ class Builder {
             this.siret,
             this.siren,
             this.employees,
-            this.activities
+            this.activities,
+            this.clients
         );
     }
 
@@ -90,6 +98,8 @@ class Company {
     private readonly siren: Siren;
     private readonly employees: Set<Employee>;
     private readonly activities: Set<WorkActivity>;
+    private readonly clients: Set<Client>;
+    private readonly projectsRegistry: ProjectsRegistry = new ProjectsRegistry();
   
     constructor(
       name: string,
@@ -100,7 +110,8 @@ class Company {
       siret: Siret,
       siren: Siren,
       employees: Set<Employee>,
-      activities: Set<WorkActivity>
+      activities: Set<WorkActivity>,
+      clients: Set<Client>
     ) {
       this.name = name;
       this.creationDate = creationDate;
@@ -111,6 +122,7 @@ class Company {
       this.siren = siren;
       this.employees = employees;
       this.activities = activities;
+      this.clients = clients;
     }
   
     getName(): string {
@@ -147,6 +159,12 @@ class Company {
   
     getActivities(): Array<WorkActivity> {
       return Array.from(this.activities);
+    }
+    getProjectsRegistry(): ProjectsRegistry {
+      return this.projectsRegistry; 
+    }
+    getClients(): Array<Client> {
+      return Array.from(this.clients);
     }
 
     static builder(): Builder {

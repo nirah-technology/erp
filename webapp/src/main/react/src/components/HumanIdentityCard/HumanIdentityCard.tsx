@@ -1,19 +1,13 @@
 import React from 'react';
 import Human from '../../data/Human';
 import './HumanIdentityCard.css';
+import { DateTimeHelper } from '../../data/Util';
 
 interface Properties {
     human: Human
 }
 
 function HumanIdentityCard({human}: Properties) {
-
-    const formatBirthDate = (birthDate: Date): string => {
-        const day = String(birthDate.getDate()).padStart(2, '0');
-        const month = String(birthDate.getMonth() + 1).padStart(2, '0');
-        const year = birthDate.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
 
     const computeAge = (birthDate: Date): number => {
         return (new Date()).getFullYear() - birthDate.getFullYear();
@@ -39,7 +33,7 @@ function HumanIdentityCard({human}: Properties) {
                     </tr>
                     <tr>
                         <th>Birth Date (age):</th>
-                        <td>{formatBirthDate(human.getBirthDate())} ({computeAge(human.getBirthDate())} ans)</td>
+                        <td>{DateTimeHelper.formatDate(human.getBirthDate())} ({computeAge(human.getBirthDate())} ans)</td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
