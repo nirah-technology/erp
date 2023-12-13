@@ -1,7 +1,9 @@
-import { File } from "./File";
-import { ProjectMember } from "./ProjectMember";
-import { Status } from "./Status";
-import { TaskIdentifier } from "./TaskIdentifier";
+import Duration from "./Duration";
+import LocalDate from "./LocalDate";
+import Priority from "./Priority";
+import ProjectMember from "./ProjectMember";
+import Status from "./Status";
+import TaskIdentifier from "./TaskIdentifier";
 
 class Task {
   private readonly id: TaskIdentifier;
@@ -9,7 +11,7 @@ class Task {
   private readonly parent: Task | null;
   private details: string;
   private status: Status;
-  private startDate: Date;
+  private startDate: LocalDate;
   private duration: Duration;
   private prority: Priority;
   private referent: ProjectMember;
@@ -19,7 +21,7 @@ class Task {
   private readonly documentations: Set<File>;
   private readonly labels: Set<string>;
   private readonly workers: Set<ProjectMember>;
-  private readonly eventListeners: Map<Status, Runnable>;
+  private readonly eventListeners: Map<Status, Function>;
 
   constructor(
     id: TaskIdentifier,
@@ -29,7 +31,7 @@ class Task {
     parent: Task | null,
     subTasks: Set<Task>,
     requiredTasks: Set<Task>,
-    startDate: Date,
+    startDate: LocalDate,
     duration: Duration,
     prority: Priority,
     labels: Set<string>,
@@ -53,7 +55,7 @@ class Task {
     this.referent = referent;
     this.workers = new Set<ProjectMember>(workers);
     this.maxWorkers = maxWorkers;
-    this.eventListeners = new Map<Status, Runnable>();
+    this.eventListeners = new Map<Status, Function>();
   }
 
   getDetails(): string {
@@ -100,7 +102,7 @@ class Task {
     return this.requiredTasks;
   }
 
-  getStartDate(): Date {
+  getStartDate(): LocalDate {
     return this.startDate;
   }
 
@@ -136,7 +138,7 @@ class Task {
     this.referent = referent;
   }
 
-  setStartDate(startDate: Date): void {
+  setStartDate(startDate: LocalDate): void {
     this.startDate = startDate;
   }
 
@@ -150,13 +152,11 @@ class Task {
     }
   }
 
-  getDeadLine(): Date {
-    const endDate = new Date(this.startDate);
-    endDate.setDate(endDate.getDate() + this.duration);
-    return endDate;
+  getDeadLine(): LocalDate {
+    return this.startDate.plus(this.duration);
   }
 
-  addEventListenerOnStatusChanged(status: Status, callback: Runnable): void {
+  addEventListenerOnStatusChanged(status: Status, callback: Function): void {
     this.eventListeners.set(status, callback);
   }
 }

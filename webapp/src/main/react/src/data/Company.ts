@@ -1,5 +1,6 @@
 import EmailAddress from "./EmailAddress";
 import Employee from "./Employee";
+import LocalDate from "./LocalDate";
 import MailingAddress from "./MailingAddress";
 import PhoneNumber from "./PhoneNumber";
 import ProjectsRegistry from "./ProjectsRegistry";
@@ -9,7 +10,7 @@ import WorkActivity from "./WorkActivity";
 
 class Builder {
   private name: string = '';
-    private creationDate: Date = new Date();
+    private creationDate: LocalDate = LocalDate.now();
     private mailingAddress!: MailingAddress;
     private phoneNumber!: PhoneNumber;
     private emailAddress!: EmailAddress;
@@ -26,7 +27,7 @@ class Builder {
         return this;
     }
 
-    withCreationDate(creationDate: Date): Builder {
+    withCreationDate(creationDate: LocalDate): Builder {
         this.creationDate = creationDate;
         return this;
     }
@@ -90,7 +91,7 @@ class Builder {
 
 class Company {
     private readonly name: string;
-    private readonly creationDate: Date;
+    private readonly creationDate: LocalDate;
     private readonly mailingAddress: MailingAddress;
     private readonly phoneNumber: PhoneNumber;
     private readonly emailAddress: EmailAddress;
@@ -103,7 +104,7 @@ class Company {
   
     constructor(
       name: string,
-      creationDate: Date,
+      creationDate: LocalDate,
       mailingAddress: MailingAddress,
       phoneNumber: PhoneNumber,
       emailAddress: EmailAddress,
@@ -129,7 +130,7 @@ class Company {
       return this.name;
     }
   
-    getCreationDate(): Date {
+    getCreationDate(): LocalDate {
       return this.creationDate;
     }
   

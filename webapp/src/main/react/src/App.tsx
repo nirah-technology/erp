@@ -28,6 +28,10 @@ import HumanPlanningView from './views/HumanPlanningView/HumanPlanningView';
 import CompanyProfileView from './views/CompanyProfileView/CompanyProfileView';
 import EmployeeProfileView from './views/EmployeeProfileView/EmployeeProfileView';
 import CompanyProjectsView from './views/CompanyProjectsView/CompanyProjectsView';
+import LocalDate from './data/LocalDate';
+import LocalDateTime from './data/LocalDateTime';
+import ProjectMember from './data/ProjectMember';
+import { ProjectMemberIdentifier } from './data/ProjectMemberIdentifier';
 
 function App() {
   const [companyName] = useState<string>(String(process.env.REACT_APP_COMPANY_NAME));
@@ -38,18 +42,18 @@ function App() {
 
   useEffect(() => {
 
-    const meHuman: Human = new Human("Nicolas", "METIVIER", new Date(1993, 0, 6), Gender.MAN);
+    const meHuman: Human = new Human("Nicolas", "METIVIER", new LocalDate(1993, 0, 6), Gender.MAN);
     setMeAsHuman(meHuman);
     const meAsNirahEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(new EmailAddress("nicolas.metivier", "nirah-technology.fr"))
-      .withHiringDate(new Date(2023, 11, 30))
+      .withHiringDate(new LocalDate(2023, 11, 30))
       .withJobTitle("Gérant")
       .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .build();
     const meAsAdelyaEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(new EmailAddress("nicolas.metivier", "adelya.com"))
-      .withHiringDate(new Date(2023, 1, 2))
+      .withHiringDate(new LocalDate(2023, 1, 2))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .withJobTitle("Architecte Logiciel")
       .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
@@ -57,7 +61,7 @@ function App() {
 
     const nirah: Company = Company.builder()
       .withName("Nirah-Technology")
-      .withCreationDate(new Date(2023, 12, 24))
+      .withCreationDate(new LocalDate(2023, 12, 24))
       .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .withEmailAddress(new EmailAddress("nirah.tehnology", "gmail.com"))
@@ -67,7 +71,7 @@ function App() {
       .build();
     const adelya: Company = Company.builder()
       .withName("Adelya")
-      .withCreationDate(new Date(2003, 11, 8))
+      .withCreationDate(new LocalDate(2003, 11, 8))
       .withMailingAddress(new MailingAddress("298 Allée Du Lac, 31670 Labège, FRANCE"))
       .withPhoneNumber(new PhoneNumber(33, 623335703))
       .withEmailAddress(new EmailAddress("contact", "adelya.com"))
@@ -77,10 +81,10 @@ function App() {
       .build();
 
     const meAsNirahClient: Client = new Client();
-    const erpProjectForNirah: Project = new Project("ERP", meAsNirahClient);
+    const erpProjectForNirah: Project = Project.builder("ERP", new ProjectMember(new ProjectMemberIdentifier("")), meAsNirahClient).build();
     nirah.getProjectsRegistry().register(erpProjectForNirah);
 
-    meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(new Date(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
+    meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
 
     setMyCompanies(new Array(nirah, adelya));
     setMySelectedCompany(nirah);

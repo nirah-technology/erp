@@ -1,108 +1,104 @@
+import ChronoUnit from "./ChronoUnit";
+import Duration from "./Duration";
 import Imputation from "./Imputation";
+import LocalDate from "./LocalDate";
+import LocalDateTime from "./LocalDateTime";
+import LocalTime from "./LocalTime";
+import Week from "./Week";
 import WorkTimeSheet from "./WorkTimeSheet";
 
 export class ImputationHelper {
-    public static getImputationsForWeekFromDay(workTimeSheet: WorkTimeSheet, day: Date): Set<Imputation> {
-        return new Set(workTimeSheet.listImputations().filter((imputation) => DateTimeHelper.isDateInCurrentWeek(imputation.getDate())));
+    public static getImputationsForWeekFromDay(workTimeSheet: WorkTimeSheet, day: LocalDate): Set<Imputation> {
+        return new Set(workTimeSheet.listImputations().filter((imputation) => DateTimeHelper.isDateInCurrentWeek(imputation.getDate().toLocalDate())));
     }
 
-    public static filterImputationsByDate (imputations: Set<Imputation>, day: Date): Array<Imputation> {
-        return Array.from(imputations).filter((imputation) => DateTimeHelper.haveSameDate(imputation.getDate(), day));
+    public static filterImputationsByDate (imputations: Set<Imputation>, day: LocalDate): Array<Imputation> {
+        return Array.from(imputations).filter((imputation) => DateTimeHelper.haveSameDate(imputation.getDate().toLocalDate(), day));
     }
 }
 
 export class DateTimeHelper {
 
-    public static getWeekNumber(date: Date): number {
-        const currentDate: Date = date || new Date();
-        const firstDayOfYear: Date = new Date(currentDate.getFullYear(), 0, 1);
-        const pastDaysOfYear: number = (currentDate.getTime() - firstDayOfYear.getTime()) / 86400000;
-        return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+    public static getWeekNumber(date: LocalDate): number {
+        const firstDayOfYear = new LocalDate(date.getYear(), 1, 1);
+        const daysSinceStartOfYear = date.toEpochDay() - firstDayOfYear.toEpochDay();
+        const weekNumber = Math.ceil((daysSinceStartOfYear + firstDayOfYear.getDayOfWeek()) / 7);
+        return weekNumber;
     }
 
-    public static getPreviousWeekNumber(date: Date): number {
-        const currentDate: Date = date || new Date();
-        const previousWeekDate: Date = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000); // Soustraction de 7 jours
+    public static getPreviousWeekNumber(date: LocalDate): number {
+        const currentDate: LocalDate = date || LocalDate.now();
+        const previousWeekDate: LocalDate = currentDate.minus(Duration.ofDays(7));
         return DateTimeHelper.getWeekNumber(previousWeekDate);
     }
 
-    public static getFirstDayOfCurrentWeek(date: Date): Date {
-        const currentDate: Date = date || new Date();
+    public static getFirstDayOfCurrentWeek(date: LocalDate): LocalDate {
+        const currentDate: LocalDate = date || LocalDate.now();
         const currentDayOfWeek: number = currentDate.getDay();
 
         // Soustraction du nombre de jours pour obtenir la date du premier jour de la semaine
-        const firstDayOfWeek: Date = new Date(currentDate.getTime() - currentDayOfWeek * 24 * 60 * 60 * 1000);
+        const firstDayOfWeek: LocalDate = currentDate.minus(Duration.ofDays(currentDayOfWeek));
         return firstDayOfWeek;
     }
 
-    public static getLastDayOfCurrentWeek(date: Date): Date {
-        const firstDayOfWeek: Date = DateTimeHelper.getFirstDayOfCurrentWeek(date);
-        const lastDayOfWeek: Date = new Date(firstDayOfWeek.getTime() + 6 * 24 * 60 * 60 * 1000); // Ajout de six jours
+    public static getLastDayOfCurrentWeek(date: LocalDate): LocalDate {
+        const firstDayOfWeek: LocalDate = DateTimeHelper.getFirstDayOfCurrentWeek(date);
+        const lastDayOfWeek: LocalDate = firstDayOfWeek.plus(Duration.ofDays(6)); // Ajout de six jours
         return lastDayOfWeek;
     }
 
-    public static isDateInCurrentWeek(dateToCheck: Date): boolean {
-        const currentDate: Date = new Date();
-        const firstDayOfWeek: Date = DateTimeHelper.getFirstDayOfCurrentWeek(currentDate);
-        const lastDayOfWeek: Date = DateTimeHelper.getLastDayOfCurrentWeek(currentDate);
+    public static isDateInCurrentWeek(dateToCheck: LocalDate): boolean {
+        const currentDate: LocalDate = LocalDate.now();
+        const firstDayOfWeek: LocalDate = DateTimeHelper.getFirstDayOfCurrentWeek(currentDate);
+        const lastDayOfWeek: LocalDate = DateTimeHelper.getLastDayOfCurrentWeek(currentDate);
         return dateToCheck >= firstDayOfWeek && dateToCheck <= lastDayOfWeek;
     }
 
-    public static getDaysOfWeekForWeekNumber(weekNumber: number, year: number): Date[] {
-        const januaryFirst: Date = new Date(year, 0, 1);
+    public static getDaysOfWeekForWeekNumber(weekNumber: number, year: number): LocalDateTime[] {
+        const januaryFirst: LocalDate = new LocalDate(year, 0, 1);
         const firstDayOfYear: number = januaryFirst.getDay(); // Jour de la semaine du 1er janvier
     
         const daysToFirstSaturday: number = 6 - firstDayOfYear; // Nombre de jours jusqu'au premier samedi
         let daysToTargetWeek: number = (weekNumber - 1) * 7 + daysToFirstSaturday; // Nombre de jours jusqu'à la semaine cible
     
-        const targetWeekStartDate: Date = new Date(year, 0, 1 + daysToTargetWeek); // Date de début de la semaine cible
+        const targetWeekStartDate: LocalDateTime = new LocalDateTime(year, 0, 1 + daysToTargetWeek, 0,0,0,0); // Date de début de la semaine cible
     
-        let daysOfWeek: Date[] = [];
+        let daysOfWeek: LocalDateTime[] = [];
         let currentYear = year;
     
         for (let i = 0; i < 7; i++) {
-            const day: Date = new Date(targetWeekStartDate);
-            day.setDate(targetWeekStartDate.getDate() + i);
+            let day = targetWeekStartDate.plus(Duration.ofDays(1));
             
-            if (day.getFullYear() !== currentYear) {
-                currentYear = day.getFullYear();
+            if (day.getYear() !== currentYear) {
+                currentYear = day.getYear();
                 daysToTargetWeek -= 7;
-                day.setDate(day.getDate() - 7);
+                day = day.minus(Duration.ofDays(7));
             }
             daysOfWeek.push(day);
         }
         return daysOfWeek;
     }
 
-    public static getDayName(date: Date): string {
-        return date.toLocaleDateString('default', { weekday: 'long' });
+    public static getDayName(date: LocalDate): string {
+        return Week[date.getDayOfWeek()];
     }
 
-    public static formatDate(date: Date): string {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+    public static formatDate(date: LocalDate): string {
+        return `${date.getDay()}/${date.getMonth()}/${date.getYear()}`;
     }
 
-    public static formatTime(date: Date): string {
-        const hours: number = date.getHours();
-        const minutes: number = date.getMinutes();
-        const formattedHours: string = hours.toString().padStart(2, '0');
-        const formattedMinutes: string = minutes.toString().padStart(2, '0');
-        return `${formattedHours}:${formattedMinutes}`;
+    public static formatTime(date: LocalTime): string {
+        return `${date.getHour()}:${date.getMinute()}`;
     }
 
-    public static haveSameDate (date1: Date, date2: Date): boolean {
+    public static haveSameDate (date1: LocalDate, date2: LocalDate): boolean {
         return (
-            date1.getFullYear() === date2.getFullYear() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getDate() === date2.getDate()
+            date1.isEqual(date2)
         );
     }
 
-    public static differenceInMinutes(date1: Date, date2: Date): number {
-        const differenceInMilliseconds: number = Math.abs(date1.getTime() - date2.getTime());
+    public static differenceInMinutes(date1: LocalDateTime, date2: LocalDateTime): number {
+        const differenceInMilliseconds: number = ChronoUnit.MINUTES.between(date1, date2);
         return Math.floor(differenceInMilliseconds / (1000 * 60));
     }
     

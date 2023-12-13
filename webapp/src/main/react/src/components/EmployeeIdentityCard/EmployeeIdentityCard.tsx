@@ -1,6 +1,8 @@
 import React from 'react';
 import Employee from '../../data/Employee';
 import Human from '../../data/Human';
+import LocalDate from '../../data/LocalDate';
+import { DateTimeHelper } from '../../data/Util';
 import './EmployeeIdentityCard.css';
 
 interface Properties {
@@ -8,16 +10,8 @@ interface Properties {
 }
 
 function EmployeeIdentityCard({employee}: Properties) {
-
-    const formatDate = (date: Date): string => {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
-
-    const computeAge = (date: Date): number => {
-        return (new Date()).getFullYear() - date.getFullYear();
+    const computeAge = (date: LocalDate): number => {
+        return LocalDate.now().getYear() - date.getYear();
     }
   
   return (
@@ -41,7 +35,7 @@ function EmployeeIdentityCard({employee}: Properties) {
                     </tr>
                     <tr>
                         <th>Birth Date (age):</th>
-                        <td>{formatDate(employee.getBirthDate())} ({computeAge(employee.getBirthDate())} ans)</td>
+                        <td>{DateTimeHelper.formatDate(employee.getBirthDate())} ({computeAge(employee.getBirthDate())} ans)</td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
@@ -53,7 +47,7 @@ function EmployeeIdentityCard({employee}: Properties) {
                     </tr>
                     <tr>
                         <th>Date d'embauche:</th>
-                        <td>{formatDate(employee.getHiringDate())}</td>
+                        <td>{DateTimeHelper.formatDate(employee.getHiringDate())}</td>
                     </tr>
                     <tr>
                         <th>Addresse:</th>

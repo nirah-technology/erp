@@ -3,6 +3,7 @@ import EmailAddress from './EmailAddress';
 import EmploymentContract from './EmploymentContract';
 import Gender from './Gender';
 import Human  from './Human';
+import LocalDate from './LocalDate';
 import MailingAddress from './MailingAddress';
 import PhoneNumber from './PhoneNumber';
 import WorkTimeSheet from './WorkTimeSheet';
@@ -13,7 +14,7 @@ class Builder {
   private emailAddress!: EmailAddress;
   private mailingAddress!: MailingAddress;
   private jobTitle!: string;
-  private hiringDate!: Date;
+  private hiringDate!: LocalDate;
   private employmentContract!: EmploymentContract;
   private worktimeSheet: WorkTimeSheet = new WorkTimeSheet();
 
@@ -37,7 +38,7 @@ class Builder {
     this.jobTitle = jobTitle;
     return this;
   }
-  withHiringDate(hiringDate: Date): Builder {
+  withHiringDate(hiringDate: LocalDate): Builder {
     this.hiringDate = hiringDate;
     return this;
   }
@@ -72,20 +73,20 @@ class Employee extends Human {
   private readonly emailAddress: EmailAddress;
   private readonly mailingAddress: MailingAddress;
   private jobTitle: string;
-  private readonly hiringDate: Date;
+  private readonly hiringDate: LocalDate;
   private readonly employmentContract: EmploymentContract;
   private readonly worktimeSheet: WorkTimeSheet;
 
   constructor(
     firstName: string,
     lastName: string,
-    birthDate: Date,
+    birthDate: LocalDate,
     gender: Gender,
     phoneNumber: PhoneNumber,
     emailAddress: EmailAddress,
     mailingAddress: MailingAddress,
     jobTitle: string,
-    hiringDate: Date,
+    hiringDate: LocalDate,
     employmentContract: EmploymentContract,
     worktimeSheet: WorkTimeSheet
   ) {
@@ -115,7 +116,7 @@ class Employee extends Human {
     return this.jobTitle;
   }
 
-  getHiringDate(): Date {
+  getHiringDate(): LocalDate {
     return this.hiringDate;
   }
   

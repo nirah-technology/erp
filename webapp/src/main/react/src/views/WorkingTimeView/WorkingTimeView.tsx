@@ -8,6 +8,8 @@ import Imputation from '../../data/Imputation';
 import WorkTimeSheet from '../../data/WorkTimeSheet';
 import { DateTimeHelper, ImputationHelper } from '../../data/Util';
 import ImputationForm from '../../components/ImputationForm/ImputationForm';
+import LocalDateTime from '../../data/LocalDateTime';
+import LocalDate from '../../data/LocalDate';
 
 interface Properties {
     employee: Employee | null;
@@ -37,12 +39,12 @@ function WorkingTimeView({ employee, company }: Properties) {
         return (null);
     } else {
         
-        const today: Date = new Date();
-        const weekNumber: number = DateTimeHelper.getWeekNumber(today)-1;
-        const previousWeekNumber: number = DateTimeHelper.getPreviousWeekNumber(today)-1;
-        const imputationsForCurrentWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), today);
-        const lastDayOfPreviousWeek: Date = DateTimeHelper.getDaysOfWeekForWeekNumber(previousWeekNumber, today.getFullYear())[0];
-        const imputationsForPreviousWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), lastDayOfPreviousWeek);
+        const today: LocalDateTime = LocalDateTime.now();
+        const weekNumber: number = DateTimeHelper.getWeekNumber(today.toLocalDate())-1;
+        const previousWeekNumber: number = DateTimeHelper.getPreviousWeekNumber(today.toLocalDate())-1;
+        const imputationsForCurrentWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), today.toLocalDate());
+        const lastDayOfPreviousWeek: LocalDateTime = DateTimeHelper.getDaysOfWeekForWeekNumber(previousWeekNumber, today.getYear())[0];
+        const imputationsForPreviousWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), lastDayOfPreviousWeek.toLocalDate());
 
         return (
             <section className='WorkingTimeView-Component' id='home'>

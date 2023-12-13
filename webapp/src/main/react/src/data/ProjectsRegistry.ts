@@ -1,4 +1,5 @@
 import Project from "./Project";
+import ProjectMember from "./ProjectMember";
 
 class ProjectsRegistry {
     private static INSTANCE: ProjectsRegistry = new ProjectsRegistry();
@@ -12,8 +13,8 @@ class ProjectsRegistry {
         this.projects.add(project);
     }
 
-    createProject(name: string, client: Client): Project {
-        const project: Project = new Project(name, client);
+    createProject(name: string, director: ProjectMember, client: Client): Project {
+        const project: Project = Project.builder(name, director, client).build();
         this.register(project);
         return project;
     }

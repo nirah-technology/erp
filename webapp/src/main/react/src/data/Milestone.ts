@@ -1,3 +1,5 @@
+import Duration from "./Duration";
+import LocalDate from "./LocalDate";
 import { MilestoneIdentifier } from "./MilestoneIdentifier";
 import ProjectMember from "./ProjectMember";
 import Status from "./Status";
@@ -7,7 +9,7 @@ class Milestone {
   private readonly name: string;
   private description: string | null = null;
   private referent: ProjectMember | null = null;
-  private startDate: Date = new Date();
+  private startDate: LocalDate = LocalDate.now();
   private status: Status = Status.IDLE;
   private duration: Duration;
   private readonly documentations: Set<File> = new Set<File>();
@@ -19,7 +21,7 @@ class Milestone {
     name: string,
     description: string | null,
     referent: ProjectMember | null,
-    startDate: Date,
+    startDate: LocalDate,
     duration: Duration,
     status: Status,
     documentations: Set<File>,
@@ -49,7 +51,7 @@ class Milestone {
     this.referent = referent;
   }
 
-  setStartDate(startDate: Date): void {
+  setStartDate(startDate: LocalDate): void {
     this.startDate = startDate;
   }
 
@@ -68,15 +70,19 @@ class Milestone {
   }
 
   addLabels(labels: string[]): void {
-    this.labels.add(labels);
+    labels.forEach((label) => {
+      this.labels.add(label);
+    });
   }
 
   addDocumentation(documentation: File): void {
     this.documentations.add(documentation);
   }
 
-  addDocumentations(...documentations: File[]): void {
-    this.documentations.add(...documentations);
+  addDocumentations(documentations: File[]): void {
+    documentations.forEach((documentation) => {
+      this.documentations.add(documentation);
+    });
   }
 
   getDocumentations(): Set<File> {
@@ -103,7 +109,7 @@ class Milestone {
     return this.referent;
   }
 
-  getStartDate(): Date {
+  getStartDate(): LocalDate {
     return this.startDate;
   }
 
@@ -111,7 +117,7 @@ class Milestone {
     return this.status;
   }
 
-  getDeadline(): Date {
+  getDeadline(): LocalDate {
     return this.startDate.plus(this.duration);
   }
 
@@ -119,16 +125,8 @@ class Milestone {
     this.duration = duration;
   }
 
-  getEstimatedEndDate(): Date | undefined {
-    const estimatedEndDates: Date[] = Array.from(this.documentations).map((documentation) =>
-      Date.ofEpochDay(documentation.lastModified() / (1000 * 60 * 60 * 24))
-    );
-
-    const maxEstimatedEndDate = estimatedEndDates.reduce((maxDate, currentDate) =>
-      maxDate.isAfter(currentDate) ? maxDate : currentDate
-    );
-
-    return maxEstimatedEndDate;
+  getEstimatedEndDate(): LocalDate | undefined {
+    return this.startDate.plus(this.duration);
   }
 
   addEventListenerOnStatusChanged(status: Status, callback: Function): void {

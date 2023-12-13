@@ -1,12 +1,13 @@
 import Gender from "./Gender";
+import LocalDate from "./LocalDate";
 
 class Human {
     private readonly firstName: string;
     private readonly lastName: string;
-    private readonly birthDate: Date;
+    private readonly birthDate: LocalDate;
     private readonly gender: Gender;
   
-    constructor(firstName: string, lastName: string, birthDate: Date, gender: Gender) {
+    constructor(firstName: string, lastName: string, birthDate: LocalDate, gender: Gender) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.birthDate = birthDate;
@@ -21,7 +22,7 @@ class Human {
       return this.lastName;
     }
   
-    getBirthDate(): Date {
+    getBirthDate(): LocalDate {
       return this.birthDate;
     }
   

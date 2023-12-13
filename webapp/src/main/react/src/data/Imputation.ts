@@ -1,14 +1,15 @@
+import LocalDateTime from "./LocalDateTime";
 import Project from "./Project";
 import TimeUnit from "./TimeUnit";
 
 class Imputation {
-    private readonly date: Date;
+    private readonly date: LocalDateTime;
     private readonly number: number;
     private readonly timeUnit: TimeUnit;
     private readonly project: Project;
     private readonly details: string;
 
-    constructor(date: Date, number: number, timeUnit: TimeUnit, project: Project, details: string) {
+    constructor(date: LocalDateTime, number: number, timeUnit: TimeUnit, project: Project, details: string) {
         this.date = date;
         this.number = number;
         this.timeUnit = timeUnit;
@@ -16,7 +17,7 @@ class Imputation {
         this.details = details;
     }
 
-    public getDate(): Date {
+    public getDate(): LocalDateTime {
         return this.date;
     }
 

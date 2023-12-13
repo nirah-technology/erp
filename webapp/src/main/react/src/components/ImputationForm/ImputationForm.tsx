@@ -5,6 +5,7 @@ import TimeUnit from '../../data/TimeUnit';
 import Company from '../../data/Company';
 import Project from '../../data/Project';
 import { DateTimeHelper } from '../../data/Util';
+import LocalDateTime from '../../data/LocalDateTime';
 
 interface Properties {
   company: Company;
@@ -12,13 +13,13 @@ interface Properties {
 }
 
 function ImputationForm({company, onNewImputation}: Properties) {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<LocalDateTime>();
   const [duration, setDuration] = useState<number>();
   const [timeUnit] = useState<TimeUnit>(TimeUnit.MINUTES);
   const [project, setProject] = useState<Project>();
   const [details, setDetails] = useState<string>("");
 
-  const now: Date = new Date();
+  const now: LocalDateTime = LocalDateTime.now();
 
 
 
@@ -33,11 +34,11 @@ function ImputationForm({company, onNewImputation}: Properties) {
   }
 
   const updateFromDate = (event: any) => {
-    setDate(new Date(event.target.value));
+    setDate(LocalDateTime.from(new Date(event.target.value)));
   }
 
   const updateDuration = (event: any) => {
-    let to: Date = new Date(event.target.value);
+    let to: LocalDateTime = LocalDateTime.from(new Date(event.target.value));
     if (date) {
       let minutes: number = DateTimeHelper.differenceInMinutes(date, to);
       setDuration(minutes);
@@ -53,11 +54,11 @@ function ImputationForm({company, onNewImputation}: Properties) {
         <form onSubmit={onSubmitHandler} >
             <div>
               <label htmlFor="">De *</label>
-              <input type="datetime-local" required onChange={updateFromDate} max={now.getTime()} />
+              <input type="datetime-local" required onChange={updateFromDate}  />
             </div>
             <div>
               <label htmlFor="">Jusqu'à *</label>
-              <input type="datetime-local" max={now.getTime()} required onChange={updateDuration} />
+              <input type="datetime-local"  required onChange={updateDuration} />
             </div>
             <div>
               <label htmlFor="">Projet *</label>

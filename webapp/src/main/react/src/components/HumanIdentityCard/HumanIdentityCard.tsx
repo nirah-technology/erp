@@ -2,6 +2,8 @@ import React from 'react';
 import Human from '../../data/Human';
 import './HumanIdentityCard.css';
 import { DateTimeHelper } from '../../data/Util';
+import LocalDate from '../../data/LocalDate';
+import LocalDateTime from '../../data/LocalDateTime';
 
 interface Properties {
     human: Human
@@ -9,8 +11,8 @@ interface Properties {
 
 function HumanIdentityCard({human}: Properties) {
 
-    const computeAge = (birthDate: Date): number => {
-        return (new Date()).getFullYear() - birthDate.getFullYear();
+    const computeAge = (birthDate: LocalDate): number => {
+        return LocalDateTime.now().getYear() - birthDate.getYear();
     }
   
   return (

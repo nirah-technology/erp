@@ -1,13 +1,17 @@
+import Duration from "./Duration";
+import LocalDate from "./LocalDate";
 import { Milestone } from "./Milestone";
+import ProjectMember from "./ProjectMember";
 import Status from "./Status";
 import { Task } from "./Task";
+import WorkPackageIdentifier from "./WorkPackageIdentifier";
 
 class WorkPackage {
   private readonly id: WorkPackageIdentifier;
   private readonly name: string;
   private description: string | null = null;
   private referent: ProjectMember | null = null;
-  private startDate: Date = new Date();
+  private startDate: LocalDate = LocalDate.now();
   private status: Status = Status.IDLE;
   private duration: Duration;
   private readonly documentations: Set<File> = new Set<File>();
@@ -21,7 +25,7 @@ class WorkPackage {
     name: string,
     description: string | null,
     referent: ProjectMember | null,
-    startDate: Date,
+    startDate: LocalDate,
     duration: Duration,
     status: Status,
     documentations: Set<File>,
@@ -55,7 +59,7 @@ class WorkPackage {
     this.referent = referent;
   }
 
-  setStartDate(startDate: Date): void {
+  setStartDate(startDate: LocalDate): void {
     this.startDate = startDate;
   }
 
@@ -73,32 +77,40 @@ class WorkPackage {
     this.tasks.add(task);
   }
 
-  addTasks(...tasks: Task[]): void {
-    this.tasks.add(...tasks);
+  addTasks(tasks: Task[]): void {
+    tasks.forEach((task) => {
+      this.tasks.add(task);
+    });
   }
 
   addLabel(label: string): void {
     this.labels.add(label);
   }
 
-  addLabels(...labels: string[]): void {
-    this.labels.add(...labels);
+  addLabels(labels: string[]): void {
+    labels.forEach((label) => {
+      this.labels.add(label);
+    });
   }
 
   addDocumentation(documentation: File): void {
     this.documentations.add(documentation);
   }
 
-  addDocumentations(...documentations: File[]): void {
-    this.documentations.add(...documentations);
+  addDocumentations(documentations: File[]): void {
+    documentations.forEach((documentation) => {
+      this.documentations.add(documentation);
+    });
   }
 
   addMilestone(milestone: Milestone): void {
     this.milestones.add(milestone);
   }
 
-  addMilestones(...milestones: Milestone[]): void {
-    this.milestones.add(...milestones);
+  addMilestones(milestones: Milestone[]): void {
+    milestones.forEach((milestone) => {
+      this.milestones.add(milestone);
+    });
   }
 
   getDocumentations(): Set<File> {
@@ -129,7 +141,7 @@ class WorkPackage {
     return this.referent;
   }
 
-  getStartDate(): Date {
+  getStartDate(): LocalDate {
     return this.startDate;
   }
 
@@ -141,7 +153,7 @@ class WorkPackage {
     return this.tasks;
   }
 
-  getDeadLine(): Date {
+  getDeadLine(): LocalDate {
     return this.startDate.plus(this.duration);
   }
 
@@ -149,16 +161,16 @@ class WorkPackage {
     this.duration = duration;
   }
 
-  getEstimatedEndDate(): Date | undefined {
+  getEstimatedEndDate(): LocalDate | null {
     let mostFutureTask: Task | undefined = undefined;
 
-    for (const task of this.tasks) {
+    for (const task of Array.from(this.tasks)) {
       if (!mostFutureTask || task.getDeadLine().isAfter(mostFutureTask.getDeadLine())) {
         mostFutureTask = task;
       }
     }
 
-    return mostFutureTask ? mostFutureTask.getDeadLine() : undefined;
+    return mostFutureTask ? mostFutureTask.getDeadLine() : null;
   }
 
   computeCumulativeWorkingDays(): number {

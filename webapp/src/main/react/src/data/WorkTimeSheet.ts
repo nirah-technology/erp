@@ -1,5 +1,7 @@
+import Duration from "./Duration";
 import Imputable from "./Imputable";
 import Imputation from "./Imputation";
+import LocalDateTime from "./LocalDateTime";
 import Project from "./Project";
 import TimeUnit from "./TimeUnit";
 
@@ -54,22 +56,21 @@ class WorkTimeSheet implements Imputable {
         return workedTime;
     }
 
-    public computeWorkedTimeFromDatesRangeUsingTimeUnit(from: Date | null, to: Date | null, timeUnit: TimeUnit): number {
+    public computeWorkedTimeFromDatesRangeUsingTimeUnit(from: LocalDateTime | null, to: LocalDateTime | null, timeUnit: TimeUnit): number {
         if (!from) {
-            from = new Date();
-            from.setFullYear(from.getFullYear() - 5);
+            from = LocalDateTime.now().minus(Duration.ofDays((365*5)))
         }
         if (!to) {
-            to = new Date();
+            to = LocalDateTime.now();
         }
-        if (from.getTime() > to.getTime()) {
-            const temp: Date | null = to;
+        if (from.isAfter(to)) {
+            const temp: LocalDateTime | null = to;
             to = from;
             from = temp;
         }
 
-        const realFrom: Date = from as Date;
-        const realTo: Date = to as Date;
+        const realFrom: LocalDateTime = from as LocalDateTime;
+        const realTo: LocalDateTime = to as LocalDateTime;
 
         const filteredImputations: Imputation[] = Array.from(this.imputations).filter((workTime) =>
             workTime.getDate() > realFrom && workTime.getDate() < realTo
@@ -82,28 +83,27 @@ class WorkTimeSheet implements Imputable {
         return this.computeWorkedTimeOnProject(null, null, timeUnit, project);
     }
 
-    public computeWorkedTimeOnProject(from: Date | null, to: Date | null, timeUnit: TimeUnit, project: Project | null): number {
+    public computeWorkedTimeOnProject(from: LocalDateTime | null, to: LocalDateTime | null, timeUnit: TimeUnit, project: Project | null): number {
         if (!project) {
             return 0;
         }
     
         if (!from) {
-            from = new Date();
-            from.setFullYear(from.getFullYear() - 5);
+            from = LocalDateTime.now().minus(Duration.ofDays((365*5)))
         }
     
         if (!to) {
-            to = new Date();
+            to = LocalDateTime.now();
         }
     
-        if (from.getTime() > to.getTime()) {
-            const temp: Date | null = to;
+        if (from.isAfter(to)) {
+            const temp: LocalDateTime | null = to;
             to = from;
             from = temp;
         }
     
-        const realFrom: Date = from as Date;
-        const realTo: Date = to as Date;
+        const realFrom: LocalDateTime = from as LocalDateTime;
+        const realTo: LocalDateTime = to as LocalDateTime;
     
         const filteredImputations: Imputation[] = Array.from(this.imputations).filter((workTime) =>
             workTime.getDate() > realFrom && workTime.getDate() < realTo && workTime.getProject() === project

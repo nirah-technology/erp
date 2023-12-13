@@ -2,6 +2,8 @@ import React from 'react';
 import Company from '../../data/Company';
 import Employee from '../../data/Employee';
 import Human from '../../data/Human';
+import LocalDate from '../../data/LocalDate';
+import { DateTimeHelper } from '../../data/Util';
 import './CompanyIdentityCard.css';
 
 interface Properties {
@@ -10,15 +12,8 @@ interface Properties {
 
 function CompanyIdentityCard({company}: Properties) {
 
-    const formatDate = (birthDate: Date): string => {
-        const day = String(birthDate.getDate()).padStart(2, '0');
-        const month = String(birthDate.getMonth() + 1).padStart(2, '0');
-        const year = birthDate.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
-
-    const computeAge = (birthDate: Date): number => {
-        return (new Date()).getFullYear() - birthDate.getFullYear();
+    const computeAge = (birthDate: LocalDate): number => {
+        return LocalDate.now().getYear() - birthDate.getYear();
     }
   
   return (
@@ -37,7 +32,7 @@ function CompanyIdentityCard({company}: Properties) {
                     </tr>
                     <tr>
                         <th>Date Création (age):</th>
-                        <td>{formatDate(company.getCreationDate())} ({computeAge(company.getCreationDate())})</td>
+                        <td>{DateTimeHelper.formatDate(company.getCreationDate())} ({computeAge(company.getCreationDate())})</td>
                     </tr>
                     <tr>
                         <th>Email:</th>
