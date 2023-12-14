@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './MeView.css';
-import Human from '../../data/Human';
-import Company from '../../data/Company';
-import HumanIdentityCard from '../../components/HumanIdentityCard/HumanIdentityCard';
-import JobResumeCard from '../../components/JobResumeCard/JobResumeCard';
-import Employee from '../../data/Employee';
+import { Company, Human } from '@nirahtech/erp';
 
 interface Properties {
     human: Human|null;
@@ -34,7 +30,7 @@ function MeView({human, companies}: Properties) {
 
     return (
         <section className='Me-Component' id='home'>
-            <h1>{meAsHuman.getFirstName()} {meAsHuman.getLastName()}</h1>
+            <h1>{meAsHuman.firstName} {meAsHuman.lastName}</h1>
         </section>
     );
 }

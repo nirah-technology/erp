@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Company from '../../data/Company';
+import { Company } from '@nirahtech/erp';
 
 interface Properties {
     company: string;

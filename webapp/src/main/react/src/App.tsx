@@ -3,35 +3,18 @@ import { useEffect, useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 
 
+import { LocalDate, LocalDateTime, Month, TimeUnit } from '@nirahtech/datetime';
 import './App.css';
 import Main from './components/Main/Main';
-import Company from './data/Company';
-import EmailAddress from './data/EmailAddress';
-import Gender from './data/Gender';
-import Human from './data/Human';
-import MailingAddress from './data/MailingAddress';
-import PhoneNumber from './data/PhoneNumber';
-import Siren from './data/Siren';
-import Siret from './data/Siret';
+import CompanyProfileView from './views/CompanyProfileView/CompanyProfileView';
+import CompanyProjectsView from './views/CompanyProjectsView/CompanyProjectsView';
+import EmployeeProfileView from './views/EmployeeProfileView/EmployeeProfileView';
 import HomeView from './views/HomeView/HomeView';
-import MeView from './views/MeView/MeView';
-import CompanyView from './views/CompanyView/CompanyView';
-import Employee from './data/Employee';
-import WorkingTimeView from './views/WorkingTimeView/WorkingTimeView';
-import Imputation from './data/Imputation';
-import TimeUnit from './data/TimeUnit';
-import Project from './data/Project';
-import Client from './data/Client';
-import HumanProfileView from './views/HumanProfileView/HumanProfileView';
 import HumanJobsView from './views/HumanJobsView/HumanJobsView';
 import HumanPlanningView from './views/HumanPlanningView/HumanPlanningView';
-import CompanyProfileView from './views/CompanyProfileView/CompanyProfileView';
-import EmployeeProfileView from './views/EmployeeProfileView/EmployeeProfileView';
-import CompanyProjectsView from './views/CompanyProjectsView/CompanyProjectsView';
-import LocalDate from './data/LocalDate';
-import LocalDateTime from './data/LocalDateTime';
-import ProjectMember from './data/ProjectMember';
-import { ProjectMemberIdentifier } from './data/ProjectMemberIdentifier';
+import HumanProfileView from './views/HumanProfileView/HumanProfileView';
+import MeView from './views/MeView/MeView';
+import { Client, Company, EmailAddress, Employee, Gender, Human, Imputation, MailingAddress, PhoneNumber, Project, ProjectMember, ProjectMemberIdentifier, Siren, Siret } from '@nirahtech/erp';
 
 function App() {
   const [companyName] = useState<string>(String(process.env.REACT_APP_COMPANY_NAME));
@@ -42,52 +25,53 @@ function App() {
 
   useEffect(() => {
 
-    const meHuman: Human = new Human("Nicolas", "METIVIER", new LocalDate(1993, 0, 6), Gender.MAN);
+    const meHuman: Human = Human.of("Nicolas", "METIVIER", LocalDate.of(1993, Month.JANUARY, 6), Gender.MAN);
     setMeAsHuman(meHuman);
     const meAsNirahEmployee: Employee = Employee.builder(meHuman)
-      .withEmailAddress(new EmailAddress("nicolas.metivier", "nirah-technology.fr"))
-      .withHiringDate(new LocalDate(2023, 11, 30))
+      .withEmailAddress(EmailAddress.of("nicolas.metivier", "nirah-technology.fr"))
+      .withHiringDate(LocalDate.of(2023, 11, 30))
       .withJobTitle("Gérant")
-      .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
-      .withPhoneNumber(new PhoneNumber(33, 623335703))
+      .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
+      .withPhoneNumber(PhoneNumber.of(33, 623335703))
       .build();
     const meAsAdelyaEmployee: Employee = Employee.builder(meHuman)
-      .withEmailAddress(new EmailAddress("nicolas.metivier", "adelya.com"))
-      .withHiringDate(new LocalDate(2023, 1, 2))
-      .withPhoneNumber(new PhoneNumber(33, 623335703))
+      .withEmailAddress(EmailAddress.of("nicolas.metivier", "adelya.com"))
+      .withHiringDate(LocalDate.of(2023, Month.FEBRUARY, 2))
+      .withPhoneNumber(PhoneNumber.of(33, 623335703))
       .withJobTitle("Architecte Logiciel")
-      .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
+      .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .build();
 
     const nirah: Company = Company.builder()
       .withName("Nirah-Technology")
-      .withCreationDate(new LocalDate(2023, 12, 24))
-      .withMailingAddress(new MailingAddress("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
-      .withPhoneNumber(new PhoneNumber(33, 623335703))
-      .withEmailAddress(new EmailAddress("nirah.tehnology", "gmail.com"))
-      .withSiret(Siret.create(11111111111111))
-      .withSiren(Siren.create(999999999))
+      .withCreationDate(LocalDate.of(2023, Month.DECEMBER, 24))
+      .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
+      .withPhoneNumber(PhoneNumber.of(33, 623335703))
+      .withEmailAddress(EmailAddress.of("nirah.tehnology", "gmail.com"))
+      .withSiret(Siret.of(11111111111111))
+      .withSiren(Siren.of(999999999))
       .withEmployee(meAsNirahEmployee)
       .build();
     const adelya: Company = Company.builder()
       .withName("Adelya")
-      .withCreationDate(new LocalDate(2003, 11, 8))
-      .withMailingAddress(new MailingAddress("298 Allée Du Lac, 31670 Labège, FRANCE"))
-      .withPhoneNumber(new PhoneNumber(33, 623335703))
-      .withEmailAddress(new EmailAddress("contact", "adelya.com"))
-      .withSiret(Siret.create(45113016500033))
-      .withSiren(Siren.create(451130165))
+      .withCreationDate(LocalDate.of(2003, Month.NOVEMBER, 8))
+      .withMailingAddress(MailingAddress.of("298 Allée Du Lac, 31670 Labège, FRANCE"))
+      .withPhoneNumber(PhoneNumber.of(33, 623335703))
+      .withEmailAddress(EmailAddress.of("contact", "adelya.com"))
+      .withSiret(Siret.of(45113016500033))
+      .withSiren(Siren.of(451130165))
       .withEmployee(meAsAdelyaEmployee)
       .build();
 
     const meAsNirahClient: Client = new Client();
-    const erpProjectForNirah: Project = Project.builder("ERP", new ProjectMember(new ProjectMemberIdentifier("")), meAsNirahClient).build();
+    const meAsProjectMember: ProjectMember = ProjectMember.of(new ProjectMemberIdentifier(""), meAsNirahEmployee);
+    const erpProjectForNirah: Project = Project.builder("ERP", meAsProjectMember, meAsNirahEmployee).withClient(meAsNirahClient).build();
     nirah.getProjectsRegistry().register(erpProjectForNirah);
 
-    meAsNirahEmployee.getWorkTimeSheet().impute(new Imputation(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
+    meAsNirahEmployee.getWorkTimeSheet().impute(Imputation.of(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
 
     setMyCompanies(new Array(nirah, adelya));
-    setMySelectedCompany(nirah);
+    // setMySelectedCompany(nirah);
 
   }, []);
 
@@ -109,6 +93,7 @@ function App() {
         {/* Liste de mes entrerpsies */}
         <Route path="/work" element={<CompanyProfileView company={mySelectedCompany} employee={meAsEmployee} />} />
         <Route path="/work/profile" element={<EmployeeProfileView employee={meAsEmployee} />} />
+        <Route path="/work/clients" element={<EmployeeProfileView employee={meAsEmployee} />} />
         <Route path="/work/projects" element={<CompanyProjectsView company={mySelectedCompany} />} />
         {/* List */}
       </Route>

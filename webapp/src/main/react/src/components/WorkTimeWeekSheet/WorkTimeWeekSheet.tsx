@@ -1,12 +1,7 @@
 import React from 'react';
 import './WorkTimeWeekSheet.css';
-import Employee from '../../data/Employee';
-import Imputation from '../../data/Imputation';
-import TimeUnit from '../../data/TimeUnit';
-import { DateTimeHelper, ImputationHelper } from '../../data/Util';
-import LocalDate from '../../data/LocalDate';
-import LocalDateTime from '../../data/LocalDateTime';
-import Duration from '../../data/Duration';
+import { Duration, LocalDateTime, TimeUnit } from '@nirahtech/datetime';
+import { DateTimeHelper, Imputation, ImputationHelper } from '@nirahtech/erp';
 
 interface Properties {
     weekNumber: number;
@@ -29,16 +24,16 @@ function WorkTimeWeekSheet({ weekNumber, imputations }: Properties) {
       };
     
     const computeFinishImputationDateTime = (imputation: Imputation): LocalDateTime => {
-        let finishDate: LocalDateTime = imputation.getDate();
-        switch (imputation.getTimeUnit()) {
+        let finishDate: LocalDateTime = imputation.date;
+        switch (imputation.timeUnit) {
             case TimeUnit.MINUTES:
-                finishDate = imputation.getDate().plus(Duration.ofMinutes(imputation.getNumber()));
+                finishDate = imputation.date.plusDuration(Duration.ofMinutes(imputation.number));
                 break;
             case TimeUnit.HOURS:
-                finishDate = imputation.getDate().plus(Duration.ofHours(imputation.getNumber()));
+                finishDate = imputation.date.plusDuration(Duration.ofHours(imputation.number));
                 break;
             case TimeUnit.DAYS:
-                finishDate = imputation.getDate().plus(Duration.ofDays(imputation.getNumber()));
+                finishDate = imputation.date.plusDuration(Duration.ofDays(imputation.number));
                 break;
             default:
                 break;
@@ -50,12 +45,12 @@ function WorkTimeWeekSheet({ weekNumber, imputations }: Properties) {
         const imputationsByDate: Array<Imputation> = ImputationHelper.filterImputationsByDate(imputations, date.toLocalDate());
         let workedMinutes: number = 0;
         imputationsByDate.forEach((imputation) => {
-            switch (imputation.getTimeUnit()) {
+            switch (imputation.timeUnit) {
                 case TimeUnit.MINUTES:
-                    workedMinutes += imputation.getNumber();
+                    workedMinutes += imputation.number;
                     break;
                 case TimeUnit.HOURS:
-                    workedMinutes += (imputation.getNumber()*60);
+                    workedMinutes += (imputation.number*60);
                     break;
                 default:
                     break;
@@ -77,7 +72,7 @@ function WorkTimeWeekSheet({ weekNumber, imputations }: Properties) {
                 </thead>
                 <tbody>
                     {
-                        sortDatesDescending(DateTimeHelper.getDaysOfWeekForWeekNumber(weekNumber, new Date().getFullYear())).map((dayOfWeek) => {
+                        sortDatesDescending(DateTimeHelper.getDaysOfWeekForWeekNumber(weekNumber, LocalDateTime.now().getYear())).map((dayOfWeek) => {
                             return (
                                 <tr>
                                     <th>{DateTimeHelper.getDayName(dayOfWeek.toLocalDate())} {DateTimeHelper.formatDate(dayOfWeek.toLocalDate())}</th>
@@ -86,7 +81,7 @@ function WorkTimeWeekSheet({ weekNumber, imputations }: Properties) {
                                             <li>
                                                 {
                                                     ImputationHelper.filterImputationsByDate(imputations, dayOfWeek.toLocalDate()).map((imputation) => (
-                                                        <div>from: <span>{DateTimeHelper.formatTime(imputation.getDate().toLocalTime())}</span> to: <span>{DateTimeHelper.formatTime(computeFinishImputationDateTime(imputation).toLocalTime())}</span></div>
+                                                        <div>from: <span>{DateTimeHelper.formatTime(imputation.date.toLocalTime())}</span> to: <span>{DateTimeHelper.formatTime(computeFinishImputationDateTime(imputation).toLocalTime())}</span></div>
                                                     ))
                                                 }
                                             </li>

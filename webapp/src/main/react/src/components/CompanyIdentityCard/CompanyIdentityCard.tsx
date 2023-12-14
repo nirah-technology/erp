@@ -1,10 +1,7 @@
 import React from 'react';
-import Company from '../../data/Company';
-import Employee from '../../data/Employee';
-import Human from '../../data/Human';
-import LocalDate from '../../data/LocalDate';
-import { DateTimeHelper } from '../../data/Util';
 import './CompanyIdentityCard.css';
+import { LocalDate } from '@nirahtech/datetime';
+import { Company, DateTimeHelper } from '@nirahtech/erp';
 
 interface Properties {
     company: Company
@@ -40,7 +37,7 @@ function CompanyIdentityCard({company}: Properties) {
                     </tr>
                     <tr>
                         <th>Addresse:</th>
-                        <td>{company.getMailingAddress().getAddress()}</td>
+                        <td>{company.getMailingAddress().address}</td>
                     </tr>
                     <tr>
                         <th>Téléphone:</th>
@@ -48,11 +45,11 @@ function CompanyIdentityCard({company}: Properties) {
                     </tr>
                     <tr>
                         <th>SIREN:</th>
-                        <td>{company.getSiren().getCode()}</td>
+                        <td>{company.getSiren().code}</td>
                     </tr>
                     <tr>
                         <th>SIRET:</th>
-                        <td>{company.getSiret().getCode()}</td>
+                        <td>{company.getSiret().code}</td>
                     </tr>
                     <tr>
                         <th>Total Employés:</th>

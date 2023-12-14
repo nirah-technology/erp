@@ -1,9 +1,7 @@
 import React from 'react';
-import Employee from '../../data/Employee';
-import Human from '../../data/Human';
-import LocalDate from '../../data/LocalDate';
-import { DateTimeHelper } from '../../data/Util';
 import './EmployeeIdentityCard.css';
+import { LocalDate } from '@nirahtech/datetime';
+import { DateTimeHelper, Employee } from '@nirahtech/erp';
 
 interface Properties {
     employee: Employee
@@ -18,7 +16,7 @@ function EmployeeIdentityCard({employee}: Properties) {
     <div className='EmployeeIdentityCard-Component'>
         <div className='profile-resume'>
             <img src="/logo512.png" alt="Avatar" />
-            <h2>{employee.getFirstName()} {employee.getLastName()}</h2>
+            <h2>{employee.firstName} {employee.lastName}</h2>
             <p>{employee.getJobTitle()}</p>
         </div>
         <div className='profile-details'>
@@ -27,19 +25,19 @@ function EmployeeIdentityCard({employee}: Properties) {
                 <tbody>
                     <tr>
                         <th>First Name:</th>
-                        <td>{employee.getFirstName()}</td>
+                        <td>{employee.firstName}</td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
-                        <td>{employee.getLastName()}</td>
+                        <td>{employee.lastName}</td>
                     </tr>
                     <tr>
                         <th>Birth Date (age):</th>
-                        <td>{DateTimeHelper.formatDate(employee.getBirthDate())} ({computeAge(employee.getBirthDate())} ans)</td>
+                        <td>{DateTimeHelper.formatDate(employee.birthDate)} ({computeAge(employee.birthDate)} ans)</td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
-                        <td>{employee.getGender()}</td>
+                        <td>{employee.gender}</td>
                     </tr>
                     <tr>
                         <th>Email:</th>
@@ -51,7 +49,7 @@ function EmployeeIdentityCard({employee}: Properties) {
                     </tr>
                     <tr>
                         <th>Addresse:</th>
-                        <td>{employee.getMailingAddress().getAddress()}</td>
+                        <td>{employee.getMailingAddress().address}</td>
                     </tr>
                     <tr>
                         <th>Téléphone:</th>

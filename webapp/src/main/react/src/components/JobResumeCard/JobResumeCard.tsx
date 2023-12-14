@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Company from '../../data/Company';
-import Employee from '../../data/Employee';
-import Human from '../../data/Human';
 import './JobResumeCard.css';
+import { Company, Employee } from '@nirahtech/erp';
 
 interface Properties {
     employee: Employee;

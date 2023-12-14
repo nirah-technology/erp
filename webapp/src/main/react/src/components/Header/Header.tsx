@@ -1,7 +1,7 @@
 import React from 'react';
 import MainMenu from '../MainMenu/MainMenu';
 import './Header.css';
-import Company from '../../data/Company';
+import { Company } from '@nirahtech/erp';
 
 interface Properties {
     company: string;

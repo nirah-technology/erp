@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './EmployeeProfileView.css';
-import Human from '../../data/Human';
-import HumanIdentityCard from '../../components/HumanIdentityCard/HumanIdentityCard';
 import EmployeeIdentityCard from '../../components/EmployeeIdentityCard/EmployeeIdentityCard';
-import Employee from '../../data/Employee';
+import { Employee } from '@nirahtech/erp';
 
 interface Properties {
     employee: Employee|null;

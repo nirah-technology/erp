@@ -1,9 +1,7 @@
 import React from 'react';
-import Human from '../../data/Human';
 import './HumanIdentityCard.css';
-import { DateTimeHelper } from '../../data/Util';
-import LocalDate from '../../data/LocalDate';
-import LocalDateTime from '../../data/LocalDateTime';
+import { LocalDate, LocalDateTime } from '@nirahtech/datetime';
+import { DateTimeHelper, Human } from '@nirahtech/erp';
 
 interface Properties {
     human: Human
@@ -19,7 +17,7 @@ function HumanIdentityCard({human}: Properties) {
     <div className='HumanIdentityCard-Component'>
         <div className='profile-resume'>
             <img src="/logo512.png" alt="Avatar" />
-            <h2>{human.getFirstName()} {human.getLastName()}</h2>
+            <h2>{human.firstName} {human.lastName}</h2>
         </div>
         <div className='profile-details'>
             <h3>Informations Personnelles</h3>
@@ -27,19 +25,19 @@ function HumanIdentityCard({human}: Properties) {
                 <tbody>
                     <tr>
                         <th>First Name:</th>
-                        <td>{human.getFirstName()}</td>
+                        <td>{human.firstName}</td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
-                        <td>{human.getLastName()}</td>
+                        <td>{human.lastName}</td>
                     </tr>
                     <tr>
                         <th>Birth Date (age):</th>
-                        <td>{DateTimeHelper.formatDate(human.getBirthDate())} ({computeAge(human.getBirthDate())} ans)</td>
+                        <td>{DateTimeHelper.formatDate(human.birthDate)} ({computeAge(human.birthDate)} ans)</td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
-                        <td>{human.getGender()}</td>
+                        <td>{human.gender}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './WorkingTimeView.css';
-import Company from '../../data/Company';
-import Employee from '../../data/Employee';
 import WorkTimeWeekSheet from '../../components/WorkTimeWeekSheet/WorkTimeWeekSheet';
-import Imputation from '../../data/Imputation';
-import WorkTimeSheet from '../../data/WorkTimeSheet';
-import { DateTimeHelper, ImputationHelper } from '../../data/Util';
+
 import ImputationForm from '../../components/ImputationForm/ImputationForm';
-import LocalDateTime from '../../data/LocalDateTime';
-import LocalDate from '../../data/LocalDate';
+import { LocalDateTime } from '@nirahtech/datetime';
+import { Company, DateTimeHelper, Employee, Imputation, ImputationHelper } from '@nirahtech/erp';
 
 interface Properties {
     employee: Employee | null;

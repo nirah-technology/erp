@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CompanyProjectsView.css';
-import Company from '../../data/Company';
-import Employee from '../../data/Employee';
-import EmployeeIdentityCard from '../../components/EmployeeIdentityCard/EmployeeIdentityCard';
-import CompanyIdentityCard from '../../components/CompanyIdentityCard/CompanyIdentityCard';
-
+import { Company } from '@nirahtech/erp';
 interface Properties {
     company: Company|null;
 }
@@ -32,7 +28,7 @@ function CompanyProjectsView({company}: Properties) {
             <ul>
                 {Array.from(myCompany.getProjectsRegistry().getProjects()).map((project) => (
                     <li>
-                        <h2>{project.getName()}</h2>
+                        <h2>{project.name}</h2>
                     </li>
                 ))}
             </ul>

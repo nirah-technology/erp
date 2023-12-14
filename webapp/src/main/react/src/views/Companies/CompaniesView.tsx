@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CompaniesView.css';
-import Company from '../../data/Company';
+import { Company } from '@nirahtech/erp';
 
 interface Properties {
     companies: Array<Company>;
@@ -20,7 +20,7 @@ function CompaniesView({companies, onSelectCompany}: Properties) {
         <section className='Home-Component' id='home'>
             <h2>Entreprises</h2>
                 {myCompanies.map(company => <li>
-                    <Link to={"/work/".concat(String(company.getSiren().getCode()))} onClick={(e) => onLinkClickedHandler(e, company)}>
+                    <Link to={"/work/".concat(String(company.getSiren().code))} onClick={(e) => onLinkClickedHandler(e, company)}>
                         {company.getName()}
                     </Link>
                 </li>)}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './HumanProfileView.css';
-import Human from '../../data/Human';
 import HumanIdentityCard from '../../components/HumanIdentityCard/HumanIdentityCard';
+import { Human } from '@nirahtech/erp';
 
 interface Properties {
     human: Human|null;

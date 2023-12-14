@@ -52,6 +52,7 @@ nav.MainMenu-Component > ul#right li > a {
     text-align: center;
     padding: 1rem 1rem;
     line-height: 3em;
+    min-width: 7em;
 }
 
 nav.MainMenu-Component > ul#right li > a.active {

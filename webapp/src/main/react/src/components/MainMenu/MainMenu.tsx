@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, NavLink } from "react-router-dom";
 import Logo from '../Logo/Logo';
 import './MainMenu.css';
-import Company from '../../data/Company';
+import { Company } from '@nirahtech/erp';
 
 interface Properties {
     company: string;
@@ -11,6 +11,10 @@ interface Properties {
 }
 
 function MainMenu({ company, selectedCompany }: Properties) {
+    const [myCompany, setMyCompany] = useState<Company|null>();
+    useEffect(() => {
+        setMyCompany(selectedCompany);
+    }, [selectedCompany])
     return (
         <nav className='MainMenu-Component'>
             <ul id='left'>
@@ -34,12 +38,12 @@ function MainMenu({ company, selectedCompany }: Properties) {
                     </ul>
                 </li>
                 {
-                    (selectedCompany) ? (
+                    (myCompany) ? (
                         <li>
-                            <NavLink to="/work" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}>{selectedCompany.getName()}</NavLink>
+                            <NavLink to="/work" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}>{myCompany.getName()}</NavLink>
                             <ul id='company'>
                                 <li><Link to={"/work/profile"}>Profile</Link></li>
-                                <li><Link to={"/work/client"}>Clients</Link></li>
+                                <li><Link to={"/work/clients"}>Clients</Link></li>
                                 <li><Link to={"/work/projects"}>Projets</Link></li>
                             </ul>
                         </li>

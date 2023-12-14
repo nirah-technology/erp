@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import './ImputationForm.css';
-import Imputation from '../../data/Imputation';
-import TimeUnit from '../../data/TimeUnit';
-import Company from '../../data/Company';
-import Project from '../../data/Project';
-import { DateTimeHelper } from '../../data/Util';
-import LocalDateTime from '../../data/LocalDateTime';
+import { LocalDateTime, TimeUnit } from '@nirahtech/datetime';
+import { Company, DateTimeHelper, Imputation, Project } from '@nirahtech/erp';
 
 interface Properties {
   company: Company;
@@ -26,7 +22,7 @@ function ImputationForm({company, onNewImputation}: Properties) {
   const onSubmitHandler = (event: any) => {
     event.preventDefault();
     if (date && duration && timeUnit && project) {
-      let imputation: Imputation = new Imputation(date, duration, timeUnit, project, details);
+      let imputation: Imputation = Imputation.of(date, duration, timeUnit, project, details);
       if (onNewImputation) {
         onNewImputation(imputation);
       }
@@ -64,7 +60,7 @@ function ImputationForm({company, onNewImputation}: Properties) {
               <label htmlFor="">Projet *</label>
               <select name="" id="" required onChange={updateProject}>
                 {Array.from(company.getProjectsRegistry().getProjects()).map((project) => (
-                  <option value={project.getName()}>{project.getName()}</option>
+                  <option value={project.name}>{project.name}</option>
                 ))}
               </select>
             </div>
