@@ -3,30 +3,31 @@ package io.nirahtech.erp.webapp.persistence.repositories;
 import java.util.Collection;
 import java.util.Optional;
 
-import io.nirahtech.erp.webapp.persistence.api.cache.Cache;
+import io.nirahtech.cache.Cache;
+import io.nirahtech.cache.CacheFactory;
+import io.nirahtech.cache.Key;
 import io.nirahtech.erp.webapp.persistence.api.dao.Dao;
-import io.nirahtech.erp.webapp.persistence.cache.InMemoryCache;
 
-public abstract class CachedRepository<K, V> implements Dao<K, V> {
-    private final Dao<K, V> dao;
-    private final Cache<K, V> cache;
+public abstract class CachedRepository<V> implements Dao<Key, V> {
+    private final Dao<Key, V> dao;
+    private final Cache<V> cache;
 
-    protected CachedRepository(final Dao<K, V> dao) {
+    protected CachedRepository(final Dao<Key, V> dao) {
         this.dao = dao;
-        this.cache = new InMemoryCache<>();
+        this.cache = CacheFactory.createInMemoryCache();
     }
     @Override
     public Collection<V> findAll() {
         Collection<V> companies = this.cache.findAll();
         if (companies.isEmpty()) {
             companies = this.dao.findAll();
-            companies.forEach(this.cache::persist);
+            companies.forEach(this.cache::put);
         }
         return companies;
     }
     @Override
     public Optional<V> findById(K id) {
-        Optional<V> companyFound = this.cache.findById(id);
+        Optional<V> companyFound = this.cache.findAll().stream().filter(data -> data.);
         if (companyFound.isEmpty()) {
             companyFound = this.dao.findById(id);
             companyFound.ifPresent(this.cache::persist);
@@ -35,7 +36,7 @@ public abstract class CachedRepository<K, V> implements Dao<K, V> {
     }
     @Override
     public K persist(V data) {
-        K id = this.cache.persist(data);
+        K id = this.cache.put(data);
         this.dao.persist(data);
         return id;
     }

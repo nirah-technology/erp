@@ -18,6 +18,13 @@
   <dependencies>
 
     <!-- Nirah-Tech -->
+
+    <dependency>
+      <groupId>io.nirahtech.libraries</groupId>
+      <artifactId>cache</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
     <dependency>
       <groupId>io.nirahtech.libraries</groupId>
       <artifactId>oauth2</artifactId>
