@@ -24,6 +24,10 @@ function HumanIdentityCard({human}: Properties) {
             <table>
                 <tbody>
                     <tr>
+                        <th>Social Security Number:</th>
+                        <td>{human.socialSecurityNumber.code}</td>
+                    </tr>
+                    <tr>
                         <th>First Name:</th>
                         <td>{human.firstName}</td>
                     </tr>
@@ -38,6 +42,18 @@ function HumanIdentityCard({human}: Properties) {
                     <tr>
                         <th>Gender:</th>
                         <td>{human.gender}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number:</th>
+                        <td>+({human.phoneNumber.countryCode}){human.phoneNumber.number}</td>
+                    </tr>
+                    <tr>
+                        <th>Email Address:</th>
+                        <td>{human.emailAddress.toString()}</td>
+                    </tr>
+                    <tr>
+                        <th>Mailing Address:</th>
+                        <td>{human.mailingAddress.address}</td>
                     </tr>
                 </tbody>
             </table>

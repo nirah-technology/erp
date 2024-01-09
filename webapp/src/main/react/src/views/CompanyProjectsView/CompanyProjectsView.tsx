@@ -28,7 +28,10 @@ function CompanyProjectsView({company}: Properties) {
             <ul>
                 {Array.from(myCompany.getProjectsRegistry().getProjects()).map((project) => (
                     <li>
-                        <h2>{project.name}</h2>
+                        <div>
+                            <h2>{project.name}</h2>
+                            <button>Sélectionner</button>
+                        </div>
                     </li>
                 ))}
             </ul>

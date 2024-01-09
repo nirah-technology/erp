@@ -15,6 +15,7 @@ import HumanPlanningView from './views/HumanPlanningView/HumanPlanningView';
 import HumanProfileView from './views/HumanProfileView/HumanProfileView';
 import MeView from './views/MeView/MeView';
 import { Client, Company, EmailAddress, Employee, Gender, Human, Imputation, MailingAddress, PhoneNumber, Project, ProjectMember, ProjectMemberIdentifier, Siren, Siret } from '@nirahtech/erp';
+import SocialSecurityNumber from '@nirahtech/erp/dist/src/core/SocialSecurityNumber';
 
 function App() {
   const [companyName] = useState<string>(String(process.env.REACT_APP_COMPANY_NAME));
@@ -25,31 +26,32 @@ function App() {
 
   useEffect(() => {
 
-    const meHuman: Human = Human.of("Nicolas", "METIVIER", LocalDate.of(1993, Month.JANUARY, 6), Gender.MAN);
+    const meHuman: Human = Human.of(SocialSecurityNumber.of(1_93_01_32_013_042, 30), "Nicolas", "METIVIER", LocalDate.of(1993, Month.JANUARY, 6), Gender.MAN, PhoneNumber.of(33, 623335703), EmailAddress.of("nicolas.a.metivier", "gmail.com"), MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"));
     setMeAsHuman(meHuman);
     const meAsNirahEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(EmailAddress.of("nicolas.metivier", "nirah-technology.fr"))
       .withHiringDate(LocalDate.of(2023, 11, 30))
       .withJobTitle("Gérant")
-      .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
-      .withPhoneNumber(PhoneNumber.of(33, 623335703))
       .build();
     const meAsAdelyaEmployee: Employee = Employee.builder(meHuman)
       .withEmailAddress(EmailAddress.of("nicolas.metivier", "adelya.com"))
       .withHiringDate(LocalDate.of(2023, Month.FEBRUARY, 2))
-      .withPhoneNumber(PhoneNumber.of(33, 623335703))
       .withJobTitle("Architecte Logiciel")
-      .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .build();
+      const meAsAstekEmployee: Employee = Employee.builder(meHuman)
+        .withEmailAddress(EmailAddress.of("nicolas.metivier", "astek.com"))
+        .withHiringDate(LocalDate.of(2024, Month.FEBRUARY, 26))
+        .withJobTitle("Ingeneer")
+        .build();
 
     const nirah: Company = Company.builder()
       .withName("Nirah-Technology")
-      .withCreationDate(LocalDate.of(2023, Month.DECEMBER, 24))
+      .withCreationDate(LocalDate.of(2024, Month.JANUARY, 8))
       .withMailingAddress(MailingAddress.of("40 Route de Pelleport, 31480 Le Grès, FRANCE"))
       .withPhoneNumber(PhoneNumber.of(33, 623335703))
-      .withEmailAddress(EmailAddress.of("nirah.tehnology", "gmail.com"))
-      .withSiret(Siret.of(11111111111111))
-      .withSiren(Siren.of(999999999))
+      .withEmailAddress(EmailAddress.of("nirah.technology", "gmail.com"))
+      .withSiret(Siret.of(982_808_065_00014))
+      .withSiren(Siren.of(982_808_065))
       .withEmployee(meAsNirahEmployee)
       .build();
     const adelya: Company = Company.builder()
@@ -59,9 +61,20 @@ function App() {
       .withPhoneNumber(PhoneNumber.of(33, 623335703))
       .withEmailAddress(EmailAddress.of("contact", "adelya.com"))
       .withSiret(Siret.of(45113016500033))
-      .withSiren(Siren.of(451130165))
+      .withSiren(Siren.of(451_130_165))
       .withEmployee(meAsAdelyaEmployee)
       .build();
+
+    const astek: Company = Company.builder()
+    .withName("ASTEK")
+    .withCreationDate(LocalDate.of(1988, Month.JANUARY, 1))
+    .withMailingAddress(MailingAddress.of("1 Rue du Ramassier, 31700 Colomiers, FRANCE"))
+    .withPhoneNumber(PhoneNumber.of(33, 623335703))
+    .withEmailAddress(EmailAddress.of("contact", "astek.com"))
+    .withSiret(Siret.of(34798980800568))
+    .withSiren(Siren.of(347989808))
+    .withEmployee(meAsAstekEmployee)
+    .build();
 
     const meAsNirahClient: Client = new Client();
     const meAsProjectMember: ProjectMember = ProjectMember.of(new ProjectMemberIdentifier(""), meAsNirahEmployee);
@@ -70,7 +83,7 @@ function App() {
 
     meAsNirahEmployee.getWorkTimeSheet().impute(Imputation.of(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
 
-    setMyCompanies(new Array(nirah, adelya));
+    setMyCompanies(new Array(nirah, adelya, astek));
     // setMySelectedCompany(nirah);
 
   }, []);
