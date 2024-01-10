@@ -81,7 +81,7 @@ function App() {
     const erpProjectForNirah: Project = Project.builder("ERP", meAsProjectMember, meAsNirahEmployee).withClient(meAsNirahClient).build();
     nirah.getProjectsRegistry().register(erpProjectForNirah);
 
-    meAsNirahEmployee.getWorkTimeSheet().impute(Imputation.of(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
+    meAsNirahEmployee.workTimeSheet.impute(Imputation.of(LocalDateTime.now(), 4, TimeUnit.HOURS, erpProjectForNirah, ""));
 
     setMyCompanies(new Array(nirah, adelya, astek));
     // setMySelectedCompany(nirah);

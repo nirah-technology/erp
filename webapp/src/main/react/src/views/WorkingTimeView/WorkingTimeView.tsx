@@ -38,9 +38,9 @@ function WorkingTimeView({ employee, company }: Properties) {
         const today: LocalDateTime = LocalDateTime.now();
         const weekNumber: number = DateTimeHelper.getWeekNumber(today.toLocalDate())-1;
         const previousWeekNumber: number = DateTimeHelper.getPreviousWeekNumber(today.toLocalDate())-1;
-        const imputationsForCurrentWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), today.toLocalDate());
+        const imputationsForCurrentWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.workTimeSheet, today.toLocalDate());
         const lastDayOfPreviousWeek: LocalDateTime = DateTimeHelper.getDaysOfWeekForWeekNumber(previousWeekNumber, today.getYear())[0];
-        const imputationsForPreviousWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.getWorkTimeSheet(), lastDayOfPreviousWeek.toLocalDate());
+        const imputationsForPreviousWeek: Set<Imputation> = ImputationHelper.getImputationsForWeekFromDay(meAsEmployee.workTimeSheet, lastDayOfPreviousWeek.toLocalDate());
 
         return (
             <section className='WorkingTimeView-Component' id='home'>

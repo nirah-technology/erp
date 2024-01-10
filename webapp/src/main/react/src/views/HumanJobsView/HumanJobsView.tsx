@@ -32,7 +32,7 @@ function HumanJobsView({ human, companies, onSelectCompany }: Properties) {
     const retrieveMyselfAsEmployee = (company: Company): Employee | null => {
         let myselfAsEmployee: Employee | null = null;
         company.getEmployees().forEach((employee) => {
-            if (employee.is(meAsHuman)) {
+            if (employee.human.is(meAsHuman)) {
                 myselfAsEmployee = employee;
             }
         })

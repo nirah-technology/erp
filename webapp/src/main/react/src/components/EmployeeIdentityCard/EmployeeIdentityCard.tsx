@@ -16,8 +16,8 @@ function EmployeeIdentityCard({employee}: Properties) {
     <div className='EmployeeIdentityCard-Component'>
         <div className='profile-resume'>
             <img src="/logo512.png" alt="Avatar" />
-            <h2>{employee.firstName} {employee.lastName}</h2>
-            <p>{employee.getJobTitle()}</p>
+            <h2>{employee.human.firstName} {employee.human.lastName}</h2>
+            <p>{employee.jobTitle}</p>
         </div>
         <div className='profile-details'>
             <h3>Informations Professionnelles</h3>
@@ -25,39 +25,51 @@ function EmployeeIdentityCard({employee}: Properties) {
                 <tbody>
                     <tr>
                         <th>First Name:</th>
-                        <td>{employee.firstName}</td>
+                        <td>{employee.human.firstName}</td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
-                        <td>{employee.lastName}</td>
+                        <td>{employee.human.lastName}</td>
                     </tr>
                     <tr>
                         <th>Birth Date (age):</th>
-                        <td>{DateTimeHelper.formatDate(employee.birthDate)} ({computeAge(employee.birthDate)} ans)</td>
+                        <td>{DateTimeHelper.formatDate(employee.human.birthDate)} ({computeAge(employee.human.birthDate)} ans)</td>
                     </tr>
                     <tr>
                         <th>Gender:</th>
-                        <td>{employee.gender}</td>
+                        <td>{employee.human.gender}</td>
                     </tr>
                     <tr>
                         <th>Email:</th>
-                        <td><a href={"mailto:"+employee.getEmailAddress().toString()}>{employee.getEmailAddress().toString()}</a></td>
+                        {(employee.businessEmailAddress.isPresent() ? (
+                            <td><a href={"mailto:"+employee.businessEmailAddress.get().toString()}>{employee.businessEmailAddress.get().toString()}</a></td>
+                        ) : (
+                            <td><a href={"mailto:"+employee.human.emailAddress.toString()}>{employee.human.emailAddress.toString()}</a></td>
+                        ))}
                     </tr>
                     <tr>
                         <th>Date d'embauche:</th>
-                        <td>{DateTimeHelper.formatDate(employee.getHiringDate())}</td>
+                        <td>{DateTimeHelper.formatDate(employee.hiringDate)}</td>
                     </tr>
                     <tr>
                         <th>Addresse:</th>
-                        <td>{employee.getMailingAddress().address}</td>
+                        {(employee.businessMailingAddress.isPresent() ? (
+                            <td>{employee.businessMailingAddress.get().address}</td>
+                            ) : (
+                            <td>{employee.human.mailingAddress.address}</td>
+                        ))}
                     </tr>
                     <tr>
                         <th>Téléphone:</th>
-                        <td><a href={"tel:"+employee.getPhoneNumber().toString()}>{employee.getPhoneNumber().toString()}</a></td>
+                        {(employee.businessPhoneNumber.isPresent() ? (
+                            <td>{employee.businessPhoneNumber.get().toString()}</td>
+                            ) : (
+                            <td>{employee.human.phoneNumber.toString()}</td>
+                        ))}
                     </tr>
                     <tr>
                         <th>Poste:</th>
-                        <td>{employee.getJobTitle()}</td>
+                        <td>{employee.jobTitle}</td>
                     </tr>
                 </tbody>
             </table>
